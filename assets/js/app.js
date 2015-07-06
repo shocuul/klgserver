@@ -1,4 +1,4 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngSails']);
+var app = angular.module('KLGServerApp', ['ngMaterial', 'ngSails']);
 
 app.controller('AppCtrl', ['$scope', '$sails', '$http', '$filter', '$interval', '$mdSidenav', '$mdDialog', function ($scope, $sails, $http, $filter, $interval, $mdSidenav, $mdDialog) {
 
