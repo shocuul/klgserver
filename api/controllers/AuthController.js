@@ -1,4 +1,11 @@
-module.exports{
+/**
+ * AuthController
+ *
+ * @description :: Server-side logic for managing auths
+ * @help        :: See http://links.sailsjs.org/docs/controllers
+ */
+
+module.exports = {
   authenticate : function(req,res){
     var email = req.param('email');
     var password = req.param('password');
