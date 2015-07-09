@@ -6,6 +6,9 @@
  */
 
 module.exports = {
-	
-};
 
+	create: function(req, res){
+		res.json(301,'To create user go to /auth/register');
+	}
+
+};
