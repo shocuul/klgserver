@@ -1,4 +1,5 @@
-app.config(function($stateProvider,$urlRouterProvider,AccessLevels){
+angular.module('KLGServerApp')
+  .config(function($stateProvider,$urlRouterProvider,AccessLevels){
   $stateProvider
     .state('anon',{
       abstract: true,

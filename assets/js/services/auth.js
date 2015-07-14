@@ -1,4 +1,5 @@
-app.factory('Auth', function($http, LocalService, AccessLevels){
+angular.module('KLGServerApp').
+  factory('Auth', function($http, LocalService, AccessLevels){
   return {
     authorize: function(access){
       if(access == AccessLevels.user){

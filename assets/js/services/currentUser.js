@@ -1,4 +1,5 @@
-app.factory('CurrentUser',function(LocalService){
+angular.module('KLGServerApp')
+  .factory('CurrentUser',function(LocalService){
   return{
     user: function(){
       if(LocalService.get('auth_token')){

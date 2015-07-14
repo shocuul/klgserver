@@ -1,4 +1,5 @@
-app.controller('LoginCtrl',function($scope,$state,Auth){
+angular.module('KLGServerApp')
+  .controller('LoginCtrl',function($scope,$state,Auth){
   $scope.errors = [];
 
   $scope.login = function(){

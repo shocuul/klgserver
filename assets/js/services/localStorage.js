@@ -1,4 +1,5 @@
-app.factory('LocalService',function(){
+angular.module('KLGServerApp')
+  .factory('LocalService',function(){
   return {
     get: function(key){
       return localStorage.getItem(key);

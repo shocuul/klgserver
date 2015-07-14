@@ -1,4 +1,5 @@
-app.constant('AccessLevels',{
+angular.module('KLGServerApp')
+  .constant('AccessLevels',{
   anon:0,
   user:1
 });
