@@ -1,4 +1,4 @@
-var app = angular.module('KLGServerApp',['ngMaterial','ngSails','app-templates','ui.router']);
+var app = angular.module('KLGServerApp',['ngMaterial','ngSails','app-templates','ui.router','ngMessages']);
 
 app.run(function($rootScope,$state,Auth){
   $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){

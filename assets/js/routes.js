@@ -11,7 +11,7 @@ app.config(function($stateProvider,$urlRouterProvider,AccessLevels){
       url:'/',
       templateUrl:'home.html'
     })
-    .state('anon.login'{
+    .state('anon.login',{
       url:'/login',
       templateUrl:'auth/login.html',
       controller: 'LoginCtrl'
