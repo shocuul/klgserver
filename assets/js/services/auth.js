@@ -12,16 +12,19 @@ angular.module('KLGServerApp').
       return LocalService.get('auth_token');
     },
     login:function(credentials){
+      console.log(credentials);
       var login = $http.post('/auth/authenticate',credentials);
       login.success(function(result){
         LocalService.set('auth_token',JSON.stringify(result));
       });
+      console.log(login);
       return login;
     },
     logout : function(){
       LocalService.unset('auth_token');
     },
     register: function(formData){
+      console.log(formData);
       LocalService.unset('auth_token');
       var register = $http.post('/auth/register', formData);
       register.success(function(result){

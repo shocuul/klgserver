@@ -1,8 +1,9 @@
-<form ng-submit="login()" name="registerForm">
+<alert class="alert" ng-repeat="error in errors" type="danger">{{error.err}}</alert>
+<form ng-submit="login()" name="registerForm" novalidate>
   <md-input-container>
     <label>Correo Electronico</label>
     <input name="email" type="email" ng-model="user.email" required/>
-    <div ng-message="registerForm.email.$error" ng-if="!registerForm.email.$dirty">
+    <div ng-messages="registerForm.email.$error">
       <div ng-message="required">
         Olvidaste introducir tu correo electronico.
       </div>
@@ -14,7 +15,7 @@
   <md-input-container>
     <label>Contraseña</label>
     <input name="password" type="password" ng-model="user.password" required />
-    <div ng-message="registerForm.password.$error" ng-if="registerForm.password.$dirty">
+    <div ng-messages="registerForm.password.$error">
       <div ng-message="required">
         Olvidaste tu contraseña.
       </div>

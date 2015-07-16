@@ -5,6 +5,8 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
+var bcrypt = require('bcrypt');
+
 module.exports = {
 
   schema: true,
@@ -34,7 +36,7 @@ module.exports = {
       })
     })
   },
-  comparePassword: function(password, user, cb){
+  validPassword: function(password, user, cb){
     bcrypt.compare(password, user.encryptedPassword,function(err, match){
       if(err) cb(err);
       if(match){

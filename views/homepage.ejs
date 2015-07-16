@@ -4,8 +4,10 @@
       <h1>KLG Server</h1>
     </div>
     <span flex></span>
-    <md-button class="md-secundary" href="./#/register">Registrarse</md-button>
-    <md-button class="md-secundary" href="./#/login">Iniciar Sesion</md-button>
+    <md-button ng-hide="auth.isAuthenticated()" class="md-secundary" href="./#/register">Registrarse</md-button>
+    <md-button ng-hide="auth.isAuthenticated()" class="md-secundary" href="./#/login">Iniciar Sesion</md-button>
+    <h6 ng-show="auth.isAuthenticated()">Hola, <strong>{{currentUser().email}}</strong></h6>
+    <md-button ng-show="auth.isAuthenticated()" class="md-secundary" ng-click="logout()">Cerrar Sesion</md-button>
   </md-toolbar>
   <md-content class="md-padding">
     <div layout="row" layout-align="center">
