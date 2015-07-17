@@ -1,9 +1,10 @@
 <div ng-controller="NavCtrl">
   <md-toolbar class"md-whiteframe-z1" md-scroll-shrink layout="row">
     <div class="md-toolbar-tools">
-      <h1>KLG Server</h1>
+      <a href="#/"><h1>KLG Server</h1></a>
     </div>
-    <span flex></span>
+    <md-button ng-show="auth.isAuthenticated()" class="md-secundary" href="./#/servers">Servidores</md-button>
+    <span flex="65"></span>
     <md-button ng-hide="auth.isAuthenticated()" class="md-secundary" href="./#/register">Registrarse</md-button>
     <md-button ng-hide="auth.isAuthenticated()" class="md-secundary" href="./#/login">Iniciar Sesion</md-button>
     <h6 ng-show="auth.isAuthenticated()">Hola, <strong>{{currentUser().email}}</strong></h6>

@@ -37,5 +37,19 @@ angular.module('KLGServerApp')
         controller:'DashboardCtrl'
       });
 
+    $stateProvider
+      .state('server',{
+        abstract:true,
+        template:'<ui-view/>',
+        data:{
+          access: AccessLevels.user
+        }
+      })
+      .state('server.dashboard',{
+        url:'/servers',
+        templateUrl:'server/dashboard.html',
+        controller:'ServerDashboardCtrl'
+      });
+
     $urlRouterProvider.otherwise('/');
 });

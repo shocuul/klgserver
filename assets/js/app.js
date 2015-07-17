@@ -8,6 +8,11 @@ angular.module('KLGServerApp',['ngMaterial','ngSails','app-templates','ui.router
   });
 });
 
+angular.module('KLGServerApp')
+  .config(['$sailsProvider', function($sailsProvider){
+    $sailsProvider.url = 'http://localhost:1337';
+  }]);
+
 // var app = angular.module('KLGServerApp', ['ngMaterial', 'ngSails']);
 //
 // app.controller('AppCtrl', ['$scope', '$sails', '$http', '$filter', '$interval', '$mdSidenav', '$mdDialog', function ($scope, $sails, $http, $filter, $interval, $mdSidenav, $mdDialog) {
