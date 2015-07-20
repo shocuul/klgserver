@@ -9,5 +9,7 @@ module.exports = {
 	new:function(req, res){
 		var files = ls('.');
 		sails.log(files);
+		mkdir('-p', 'usuarios/tes2');
+		return res.json({success:'Server Created'});
 	}
 };
