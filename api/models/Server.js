@@ -8,7 +8,17 @@
 module.exports = {
 
   attributes: {
-
+  	name:{
+  		type:'string'
+  	},
+  	game:{
+  		type:'string',
+  		emum:['minecraft','cs16','csgo'],
+  		required:true
+  	},
+  	owner:{
+  		model:'user'
+  	}
   }
 };
 

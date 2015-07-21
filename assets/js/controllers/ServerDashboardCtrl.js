@@ -1,6 +1,8 @@
 angular.module('KLGServerApp')
-  .controller('ServerDashboardCtrl',function($scope,$sails,$http){
+  .controller('ServerDashboardCtrl',function($scope,$sails,$http,CurrentUser){
     //console.log("Iniciado");
+    var userId = CurrentUser.user().id;
+    console.log(userId);
     $scope.create = function(){
       console.log("enter");
       var req = {

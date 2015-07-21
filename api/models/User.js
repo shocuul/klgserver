@@ -20,6 +20,10 @@ module.exports = {
     encryptedPassword:{
       type:'string'
     },
+    servers:{
+      collection:'server',
+      via:'owner'
+    },
     toJSON: function(){
       var obj = this.toObject();
       delete obj.encryptedPassword;
