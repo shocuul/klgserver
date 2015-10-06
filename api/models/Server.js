@@ -18,7 +18,24 @@ module.exports = {
   	},
   	owner:{
   		model:'user'
-  	}
+  	},
+    base_dir:{
+      type:'string'
+    }
+  },
+  beforeCreate:function(values, cb){
+    sails.log(values.owner);
+    switch(values.game){
+      case 'cs16':
+        statements_1
+        break;
+      case 'csgo':
+        break;
+      default:
+        sails.log.error('Algo salio mal en beforeCreate de Servers');
+        break;
+    }
+    cb();
   }
 };
 
