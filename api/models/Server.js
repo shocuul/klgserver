@@ -13,7 +13,7 @@ module.exports = {
   	},
   	game:{
   		type:'string',
-  		emum:['minecraft','cs16','csgo'],
+  		// emum:['minecraft','cs16','csgo'],
   		required:true
   	},
   	owner:{
@@ -36,6 +36,9 @@ module.exports = {
         break;
     }
     cb();
+  },
+  afterCreate:function(values, cb){
+    sails.log(values);
+    cb();
   }
 };
-
