@@ -1,5 +1,6 @@
-angular.module('KLGServerApp',['ngMaterial','ngSails','app-templates','ui.router','ngMessages'])
+angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages'])
   .run(function($rootScope,$state,Auth){
+    console.log("Works");
   $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
     if(!Auth.authorize(toState.data.access)){
       event.preventDefault();

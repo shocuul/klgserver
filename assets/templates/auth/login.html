@@ -1,4 +1,45 @@
-<alert class="alert" ng-repeat="error in errors" type="danger">{{error.err}}</alert>
+<section class="content-wrap full youplay-login">
+  <div class="youplay-banner banner-top">
+    <div class="image" style="background-image:url('/images/csgoBanner.jpg')"></div>
+    <div class="info">
+      <div>
+        <div class="container align-center">
+          <div class="youplay-form">
+            <h2 style="padding-bottom:1em;">Iniciar sesion</h2>
+            <form ng-submit="login()" name="loginForm" novalidate>
+              <!-- Cooreo Electronico -->
+              <div class="youplay-input">
+                <input type="email" name="email" ng-model="user.email" required placeholder="Correo Electronico">
+                <div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$dirty">
+                  <p ng-message="required" class="alert alert-warning">
+                    Correo Electronico requerido.
+                  </p>
+                  <p ng-message="email" class="alert alert-warning">
+                    Formato invalido.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Contraseña -->
+              <div class="youplay-input">
+                <input type="password" name="password" ng-model="user.password" required placeholder="Contraseña">
+                <div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$dirty">
+                  <p ng-message="required" class="alert alert-warning">
+                    Contraseña requerida.
+                  </p>
+                </div>
+              </div>
+              <button class="btn btn-default db">Iniciar sesion</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- <alert class="alert" ng-repeat="error in errors" type="danger">{{error.err}}</alert>
 <form ng-submit="login()" name="registerForm" novalidate>
   <md-input-container>
     <label>Correo Electronico</label>
@@ -22,4 +63,4 @@
     </div>
   </md-input-container>
   <md-button type="submit" class="md-primary btn btn-primary">Iniciar Sesion</md-button>
-</form>
+</form> -->
