@@ -15,6 +15,9 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  'styles/bootstrap.min.css',
+  'styles/font-awesome.min.css',
+  'styles/youplay.min.css',
   'styles/**/*.css'
 ];
 
@@ -25,9 +28,9 @@ var jsFilesToInject = [
 
   // Load sails.io before everything else
   'js/dependencies/sails.io.js',
-
-  // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/jquery.min.js',
+  // Dependencies like jQuery, or Angular are brought in here
+  
   'js/dependencies/bootstrap.min.js',
   'js/dependencies/skrollr.min.js',
   'js/dependencies/youplay.min.js',

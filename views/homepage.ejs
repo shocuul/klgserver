@@ -1,5 +1,5 @@
 <!-- Preloader -->
-<div class="page-preloader preloader-wrapp">
+<div show-during-resolve class="page-preloader preloader-wrapp">
   <img src="/images/logo.png" alt="" />
   <div class="preloader"></div>
 </div>
@@ -41,7 +41,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="auth.isAuthenticated()" class="dropdown dropdown-hover">
           <a href="#!" class="dropdown-toggle" role="button" aria-expanded="false">
-            {{currentUser.name}} <span class="badge bg-default">0</span> <span class="caret"></span> <span class="label">{{currentUser.email}}</span>
+            {{$root.currentUser.name}} <span class="badge bg-default">0</span> <span class="caret"></span> <span class="label">{{$root.currentUser.email}}</span>
           </a>
           <div class="dropdown-menu">
             <ul role="menu">

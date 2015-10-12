@@ -1,5 +1,6 @@
 angular.module('KLGServerApp').
   factory('Auth', function($http, LocalService, AccessLevels){
+  var currentUser = {};
   return {
     authorize: function(access){
       if(access == AccessLevels.user){
@@ -16,21 +17,27 @@ angular.module('KLGServerApp').
       var login = $http.post('/auth/authenticate',credentials);
       login.success(function(result){
         LocalService.set('auth_token',JSON.stringify(result));
+        currentUser = angular.fromJson(LocalService.get('auth_token')).user;
       });
       console.log(login);
       return login;
     },
     logout : function(){
       LocalService.unset('auth_token');
+      currentUser = {};
     },
     register: function(formData){
       console.log(formData);
       LocalService.unset('auth_token');
       var register = $http.post('/auth/register', formData);
       register.success(function(result){
+        console.log("Registro");
         LocalService.set('auth_token',JSON.stringify(result));
       });
       return register;
+    },
+    currentUser : function(){
+        return currentUser;
     }
   }
 })

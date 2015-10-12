@@ -9,4 +9,15 @@ angular.module('KLGServerApp')
       }
     }
   }
+}).directive('showDuringResolve', function($rootScope){
+  return {
+    link: function(scope,element){
+      element.css({display:'none'});
+
+      var unregister = $rootScope.$on('$routeChangeStart',function(){
+        element.css({display:'block'});
+      });
+      scope.$on('$destroy',unregister);
+    }
+  }
 })
