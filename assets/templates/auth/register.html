@@ -7,14 +7,13 @@
       <div>
         <div class="container align-center">
           <div class="youplay-form">
-            {{errors}}
             <h2 style="padding-bottom:1em;">Registro</h2>
             <form ng-submit="register()" name="registerForm" novalidate>
               <!-- Nombre -->
               <div class="youplay-input">
                 <input name="name" type="text" ng-model="user.name" required placeholder="Nombre">
                 <div ng-messages="registerForm.name.$error" ng-show="registerForm.name.$dirty">
-                  <p ng-message="required" class="alert alert-danger">
+                  <p ng-message="required" class="alert alert-warning">
                     Nombre requerido.
                   </p>
                 </div>
@@ -23,10 +22,10 @@
               <div class="youplay-input">
                 <input type="email" name="email" ng-model="user.email" required placeholder="Correo Electronico">
                 <div ng-messages="registerForm.email.$error" ng-show="registerForm.email.$dirty">
-                  <p ng-message="required" class="alert alert-danger">
+                  <p ng-message="required" class="alert alert-warning">
                     Correo Electronico requerido.
                   </p>
-                  <p ng-message="email" class="alert alert-danger">
+                  <p ng-message="email" class="alert alert-warning">
                     Formato de correo electronico invalido.
                   </p>
                 </div>
