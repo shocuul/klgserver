@@ -1,4 +1,8 @@
 
+module.exports.serverLog = function(data){
+  sails.log(data.toString());
+}
+
 module.exports.guid = function(){
   function s4(){
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -75,7 +79,7 @@ module.exports.createXMLServerConfig = function(server){
 //   var onPowerOffNode : XmlElement = xmlDoc.CreateElement("on_poweroff").InnerText = "destroy";
 //   var onRebootNode : XmlElement = xmlDoc.CreateElement("on_reboot").InnerText = "restart";
 //   var onCrashNode : XmlElement = xmlDoc.CreateElement("on_crash").InnerText = "destroy";
-  
+
 
 
 

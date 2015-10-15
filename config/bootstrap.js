@@ -17,6 +17,8 @@ module.exports.bootstrap = function(cb) {
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   //mkdir('-p','out/release');
   require('shelljs/global');
+
+  ServersManager.connect();
   //Utils.createXMLServerConfig({name:'Josep',memory:1048576});
 //   var version = exec('node --version', {silent:true}).output;
 //   sails.log(version);

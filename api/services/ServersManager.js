@@ -1,26 +1,58 @@
 var spawn, servers, connect
 spawn = require('child_process').spawn;
 
-servers = {};
-var ServerManager = {
-  servers_process : servers_process = [],
-  init:function initializeServers(){
-    Server.find({}).exec(function fincCB(err, found){
-      while(found.length)
-        console.log('Found Server with Game' + found.pop().game);
-    })
-    servers_process.push("Nuevo elemento");
-    var minecraftServerProcess = spawn('java', [
-    '-Xmx512M',
-    '-Xms256M',
-    '-jar',
-    'minecraft_server.1.8.jar',
-    'nogui'
-  ],'Path');
-  }
+servers = [];
+
+connect = function(){
+  sails.log("Estoy en la funcion connect");
+  var shell = require('shelljs');
+  shell.cd('/home/dev/Developer/SteamCMD/27020');
+  var child = shell.exec('./hlds_run -game cstrike +ip 192.168.1.70 +port 27016 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate',{async:true});
+  child.stdout.on('data',function(data){
+    sails.log(data);
+  });
+  servers.push({process:child,name:'TestServer1'});
+  sails.log(servers);
+
+  setTimeout(function(){
+    sails.log("Apagando " + servers[0].name);
+    //  servers[0].process.exit(1);
+    child.exit(1);
+   }, 10000);
+  // var cs16server = spawn('',[
+  //   '',
+  //   '',
+  //   '+port 27016',
+  //   '-pingboost 3',
+  //   '+maxplayers 22',
+  //   '+map de_dust',
+  //   '-autoupdate']);
+  //
+  // cs16server.stdout.on('data',Utils.serverLog());
+  // cs16server.stderr.on('data',Utils.serverLog());
 }
 
-module.exports = ServerManager;
+// var ServerManager = {
+//   servers_process : servers_process = [],
+//   init:function initializeServers(){
+//     Server.find({}).exec(function fincCB(err, found){
+//       while(found.length)
+//         console.log('Found Server with Game' + found.pop().game);
+//     })
+//     servers_process.push("Nuevo elemento");
+//     var minecraftServerProcess = spawn('java', [
+//     '-Xmx512M',
+//     '-Xms256M',
+//     '-jar',
+//     'minecraft_server.1.8.jar',
+//     'nogui'
+//   ],'Path');
+//   }
+// }
+
+module.exports = {
+  connect : connect
+};
 
 
 // var connect, getConnection, graph, mysql, pools, query, queryWithCache, sanitize, transaction;
