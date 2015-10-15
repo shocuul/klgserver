@@ -27,7 +27,6 @@ module.exports = {
     sails.log(values.owner);
     switch(values.game){
       case 'cs16':
-        statements_1
         break;
       case 'csgo':
         break;

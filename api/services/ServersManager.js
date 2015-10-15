@@ -1,5 +1,7 @@
 var spawn, servers, connect
-var spawn = require('child_process').spawn;
+spawn = require('child_process').spawn;
+
+servers = {};
 var ServerManager = {
   servers_process : servers_process = [],
   init:function initializeServers(){
