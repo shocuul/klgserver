@@ -7,18 +7,25 @@ connect = function(){
   sails.log("Estoy en la funcion connect");
   var shell = require('shelljs');
   shell.cd('/home/dev/Developer/SteamCMD/27020');
-  var child = shell.exec('./hlds_run -game cstrike +ip 192.168.1.70 +port 27016 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate',{async:true});
-  child.stdout.on('data',function(data){
+  var child = shell.exec('./hlds_run -game cstrike +ip 192.168.1.70 +port 27016 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate -console',{async:true});
+  servers.push({process:child,name:'TestServer1'});
+  servers[0].process.stdout.on('data',function(data){
     sails.log(data);
   });
-  servers.push({process:child,name:'TestServer1'});
+  shell.cd('/home/dev/Servers/denethics');
+  var otherchild = shell.exec('./hlds_run -game cstrike +ip 192.168.1.70 +port 27017 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate -console',{async:true});
+  servers.push({process:otherchild,name:'Other Server 2'});
+  servers[1].process.stdout.on('data',function(data){
+    sails.log(data);
+  })
   sails.log(servers);
 
-  setTimeout(function(){
-    sails.log("Apagando " + servers[0].name);
-    //  servers[0].process.exit(1);
-    child.exit(1);
-   }, 10000);
+  // setTimeout(function(){
+  //   sails.log("Apagando " + servers[0].name);
+  //   servers[0].process.stdin.write('\u0003');
+  //   //child.stdin.write(null,{ctrl:true, name:'c'});
+  //
+  //  }, 10000);
   // var cs16server = spawn('',[
   //   '',
   //   '',
