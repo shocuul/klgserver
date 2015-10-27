@@ -24,7 +24,9 @@ module.exports = {
     }
   },
   beforeCreate:function(values, cb){
-    sails.log(values.owner);
+    User.findOne(values.owner).exec(function(err, user){
+      values.name = user.name + "test";
+    })
     switch(values.game){
       case 'cs16':
         break;
@@ -36,8 +38,14 @@ module.exports = {
     }
     cb();
   },
-  afterCreate:function(values, cb){
-    sails.log(values);
+  afterCreate:function(record, cb){
+    sails.log.warn(record.id)
+    Server.findOne(record.id).exec(function(err, record){
+      record.name = "Test"
+      record.save(function(err){
+        
+      })
+    });
     cb();
   }
 };

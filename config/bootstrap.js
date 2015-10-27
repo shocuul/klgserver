@@ -17,8 +17,19 @@ module.exports.bootstrap = function(cb) {
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   //mkdir('-p','out/release');
   require('shelljs/global');
+  if(!which('awk')){
+    sails.log.warning('No se encuentra el programa awk');
+    exit(0);
+  }else if (!which('screen')) {
+    sails.log.warning('No se encuentra el programa screen');
+    exit(0);
+  }else{
+    ServersManager.create();
+    cb();
+  }
 
-  ServersManager.connect();
+
+
   //Utils.createXMLServerConfig({name:'Josep',memory:1048576});
 //   var version = exec('node --version', {silent:true}).output;
 //   sails.log(version);
@@ -33,6 +44,6 @@ module.exports.bootstrap = function(cb) {
 //   	sails.log.warn(code);
 //   	sails.log.warn(output);
 //   })
-  cb();
+
 
 };

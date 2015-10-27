@@ -1,31 +1,48 @@
-var spawn, servers, connect
+var spawn, servers, connect, create
 spawn = require('child_process').spawn;
 
 servers = [];
 
+create = function(){
+  User.findOneByEmail('shocuul@live.com',function(err, user){
+    sails.log(user.name)
+  })
+  Server.findOne(2).exec(function(err, record){
+    sails.log(record)
+  });
+}
+
 connect = function(){
   sails.log("Estoy en la funcion connect");
   var shell = require('shelljs');
+  var nombre1 = 'prueba1'
+  var nombre2 = 'prueba2'
   shell.cd('/home/dev/Developer/SteamCMD/27020');
-  var child = shell.exec('./hlds_run -game cstrike +ip 192.168.1.70 +port 27016 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate -console',{async:true});
+  var child = shell.exec('screen -AmdS '+nombre1+' ./hlds_run -game cstrike +ip 192.168.1.70 +port 27016 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate -console',{async:true});
   servers.push({process:child,name:'TestServer1'});
   servers[0].process.stdout.on('data',function(data){
     sails.log(data);
   });
   shell.cd('/home/dev/Servers/denethics');
-  var otherchild = shell.exec('./hlds_run -game cstrike +ip 192.168.1.70 +port 27017 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate -console',{async:true});
+  var otherchild = shell.exec('screen -AmdS '+nombre2+' ./hlds_run -game cstrike +ip 192.168.1.70 +port 27017 -pingboost 3 +maxplayers 22 +map de_dust -autoupdate -console',{async:true});
   servers.push({process:otherchild,name:'Other Server 2'});
   servers[1].process.stdout.on('data',function(data){
     sails.log(data);
   })
   sails.log(servers);
+  var existe = shell.exec('screen -ls | grep [.]prueba4[[:space:]]');
+  var existe2 = shell.exec('screen -ls | grep [.]prueba2[[:space:]]');
+  sails.log(typeof(existe));
+  sails.log(typeof(existe2));
 
-  // setTimeout(function(){
-  //   sails.log("Apagando " + servers[0].name);
-  //   servers[0].process.stdin.write('\u0003');
-  //   //child.stdin.write(null,{ctrl:true, name:'c'});
-  //
-  //  }, 10000);
+  setTimeout(function(){
+    sails.log("Apagando " + servers[0].name);
+    shell.exec('screen -r "'+nombre1+'" -X quit');
+    shell.exec('screen -r "'+nombre2+'" -X quit');
+    // servers[0].process.stdin.write('\u0003');
+    //child.stdin.write(null,{ctrl:true, name:'c'});
+
+   }, 10000);
   // var cs16server = spawn('',[
   //   '',
   //   '',
@@ -58,7 +75,8 @@ connect = function(){
 // }
 
 module.exports = {
-  connect : connect
+  connect : connect,
+  create : create
 };
 
 
