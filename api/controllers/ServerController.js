@@ -6,6 +6,12 @@
  */
 require('shelljs/global');
 module.exports = {
+	create:function(req,res){
+		res.json(301,'No se pueden crear servidores de esta forma');
+	},
+	start:function(req,res){
+		res.json(301,'Request'+req.params.id)
+	},
 	new:function(req, res){
 		var files = ls('.');
 		sails.log(files);

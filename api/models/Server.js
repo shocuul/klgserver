@@ -7,6 +7,8 @@
 
 module.exports = {
 
+  schema: true,
+
   attributes: {
   	name:{
   		type:'string'
@@ -23,10 +25,16 @@ module.exports = {
       type:'string'
     }
   },
+  afterUpdate:function(record, cb){
+    sails.log(record)
+    if(record.owner == null){
+      Server.destroy(record.id).exec(function(err, record){
+        if(err){cb(err)}else { cb(); }
+      });
+    }
+  },
+  //Antes de crear un servidor
   beforeCreate:function(values, cb){
-    User.findOne(values.owner).exec(function(err, user){
-      values.name = user.name + "test";
-    })
     switch(values.game){
       case 'cs16':
         break;
@@ -38,14 +46,39 @@ module.exports = {
     }
     cb();
   },
+  beforeDestroy:function(values, cb){
+    if(values.base_dir){
+      rm('-rf',''+base_dir+'/*');
+      cb();
+    }else{
+      cb();
+    }
+  },
+  // Despues de crear un servidor
   afterCreate:function(record, cb){
     sails.log.warn(record.id)
+    var serverName = '';
     Server.findOne(record.id).exec(function(err, record){
-      record.name = "Test"
-      record.save(function(err){
-        
+      User.findOne(record.owner).exec(function(err, user){
+        serverName = user.email.substring(0,3);
+        serverName = serverName.concat(record.game).concat(Utils.klsclave());
+        record.name = ''+serverName;
+        baseDir = sails.config.server.serverBaseDir + serverName;
+        record.base_dir = baseDir;
+        mkdir('-p',baseDir);
+        sails.log(record.game)
+        switch (record.game) {
+          case 'cs16':
+            cp('-Rf',''+sails.config.server.cs16BaseDir+'*',''+baseDir+'');
+            break;
+          default:
+        }
+
+        record.save(function(err){
+          if(err){cb(err)}else { cb(); }
+        })
       })
     });
-    cb();
+
   }
 };

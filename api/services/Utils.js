@@ -4,7 +4,7 @@ module.exports.serverLog = function(data){
 }
 
 module.exports.klsclave = function(){
-  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);dd 
+  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);dd
 }
 
 module.exports.guid = function(){

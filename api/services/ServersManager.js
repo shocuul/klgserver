@@ -4,12 +4,12 @@ spawn = require('child_process').spawn;
 servers = [];
 
 create = function(){
-  User.findOneByEmail('shocuul@live.com',function(err, user){
-    sails.log(user.name)
-  })
-  Server.findOne(2).exec(function(err, record){
-    sails.log(record)
-  });
+  // User.findOneByEmail('shocuul@live.com',function(err, user){
+  //   sails.log(user.name)
+  // })
+  // Server.findOne(2).exec(function(err, record){
+  //   sails.log(record)
+  // });
 }
 
 connect = function(){

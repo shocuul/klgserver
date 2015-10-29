@@ -3,8 +3,7 @@ module.exports.server = {
 	//Donde se encuentra el servidor de CSGO
 	csgoBaseDir:'/home/dev/steam/csgo',
 	//Donde se instalaran los servidores
-	serverBaseDir:'/home/servidores/',
-	cs16BaseDir:'/home/dev/steam/csgo',
-	steamCmdDir:'/home/Developer/SteamCMD',
-	ip:''
+	serverBaseDir:'/home/dev/Servers/',
+	cs16BaseDir:'/home/dev/Developer/SteamCMD/cs16/',
+	steamCmdDir:'/home/Developer/SteamCMD'
 }

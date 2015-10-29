@@ -34,7 +34,8 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+  'POST /server/:id/start':'ServerController.start'
 
   /***************************************************************************
   *                                                                          *
