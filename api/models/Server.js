@@ -28,9 +28,12 @@ module.exports = {
   afterUpdate:function(record, cb){
     sails.log(record)
     if(record.owner == null){
+      sails.log("Entro a record.owner == null");
       Server.destroy(record.id).exec(function(err, record){
-        if(err){cb(err)}else { cb(); }
+        if(err){cb(err);}else { cb(); }
       });
+    }else{
+      cb();
     }
   },
   //Antes de crear un servidor
@@ -47,12 +50,11 @@ module.exports = {
     cb();
   },
   beforeDestroy:function(values, cb){
-    if(values.base_dir){
-      rm('-rf',''+base_dir+'/*');
+    sails.log(values.where.id)
+    Server.findOne(values.where.id).exec(function(err, record){
+      rm('-Rf',record.base_dir);
       cb();
-    }else{
-      cb();
-    }
+    })
   },
   // Despues de crear un servidor
   afterCreate:function(record, cb){
@@ -66,18 +68,21 @@ module.exports = {
         baseDir = sails.config.server.serverBaseDir + serverName;
         record.base_dir = baseDir;
         mkdir('-p',baseDir);
-        sails.log(record.game)
+        sails.log(record.game);
         switch (record.game) {
           case 'cs16':
-            cp('-Rf',''+sails.config.server.cs16BaseDir+'*',''+baseDir+'');
+            // cp('-Rf',''+sails.config.server.cs16BaseDir+'',''+baseDir+'');
+            var copy = exec('cp -Rf '+sails.config.server.cs16BaseDir+'* '+baseDir+'; echo "Copia completa";',{async:true});
+            copy.stdout.on('data',function(data){
+              sails.log(data);
+            })
             break;
           default:
         }
-
-        record.save(function(err){
-          if(err){cb(err)}else { cb(); }
-        })
-      })
+        record.save();
+        sails.log("Salve")
+        cb();
+      });
     });
 
   }
