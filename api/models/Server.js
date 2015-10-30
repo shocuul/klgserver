@@ -22,11 +22,27 @@ module.exports = {
       type:'boolean',
       defaultsTo:false
     },
-  	owner:{
-  		model:'user'
-  	},
     base_dir:{
       type:'string'
+    },
+    num_player:{
+      type:'integer',
+      required:true
+    },
+    configuration:{
+      type:'json'
+    },
+    //Asosiations
+    owner:{
+  		model:'user'
+  	},
+    logs:{
+      collection:'serverlog',
+      via:'by'
+    },
+    startServer:function(){
+      var shell = require('shelljs');
+      shell.cd(this.base_dir);
     }
   },
   afterUpdate:function(record, cb){
@@ -76,8 +92,14 @@ module.exports = {
         switch (record.game) {
           case 'cs16':
             // cp('-Rf',''+sails.config.server.cs16BaseDir+'',''+baseDir+'');
+            var cs16config ={
+              'daemon_game':'hlds_run',
+              'port':27015
+            }
+            record.configuration = cs16config;
             var copy = exec('cp -Rf '+sails.config.server.cs16BaseDir+'* '+baseDir+'; echo "Copia completa";',{async:true});
             copy.stdout.on('data',function(data){
+              Serverlog.create({message:data,by:record.id}).exec(function(err,log){});
               Server.update({id:record.id},{ready:true}).exec(function(err,update){
                 if(err){
                   return;

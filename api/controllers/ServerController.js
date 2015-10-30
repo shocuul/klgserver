@@ -10,6 +10,7 @@ module.exports = {
 		res.json(301,'No se pueden crear servidores de esta forma');
 	},
 	start:function(req,res){
+		//Agregar seguridad mas adelante 
 		res.json(301,'Request'+req.params.id)
 	},
 	new:function(req, res){
