@@ -15,9 +15,13 @@ module.exports = {
   	},
   	game:{
   		type:'string',
-  		// emum:['minecraft','cs16','csgo'],
+  		enum:['minecraft','cs16','csgo'],
   		required:true
   	},
+    ready:{
+      type:'boolean',
+      defaultsTo:false
+    },
   	owner:{
   		model:'user'
   	},
@@ -74,7 +78,11 @@ module.exports = {
             // cp('-Rf',''+sails.config.server.cs16BaseDir+'',''+baseDir+'');
             var copy = exec('cp -Rf '+sails.config.server.cs16BaseDir+'* '+baseDir+'; echo "Copia completa";',{async:true});
             copy.stdout.on('data',function(data){
-              sails.log(data);
+              Server.update({id:record.id},{ready:true}).exec(function(err,update){
+                if(err){
+                  return;
+                }
+              });
             })
             break;
           default:
