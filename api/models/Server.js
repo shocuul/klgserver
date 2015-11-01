@@ -18,6 +18,9 @@ module.exports = {
   		enum:['minecraft','cs16','csgo'],
   		required:true
   	},
+    port:{
+      type:'integer'
+    },
     ready:{
       type:'boolean',
       defaultsTo:false
@@ -43,6 +46,7 @@ module.exports = {
     startServer:function(){
       var shell = require('shelljs');
       shell.cd(this.base_dir);
+      shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.configuration.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' '+this.configuration.extraParams+'',{async:true});
     }
   },
   afterUpdate:function(record, cb){
@@ -93,8 +97,9 @@ module.exports = {
           case 'cs16':
             // cp('-Rf',''+sails.config.server.cs16BaseDir+'',''+baseDir+'');
             var cs16config ={
-              'daemon_game':'hlds_run',
-              'port':27015
+              'daemon_game':'hlds_run -game cstrike',
+              'map':'de_dust',
+              'extraParams':'-pingboost 3 -autoupdate -console'
             }
             record.configuration = cs16config;
             var copy = exec('cp -Rf '+sails.config.server.cs16BaseDir+'* '+baseDir+'; echo "Copia completa";',{async:true});
@@ -109,6 +114,7 @@ module.exports = {
             break;
           default:
         }
+        ServersManager.preparePort(record.id)
         record.save();
         sails.log("Salve")
         cb();

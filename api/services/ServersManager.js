@@ -1,7 +1,25 @@
-var spawn, servers, connect, create
+var spawn, servers, connect, create, preparePort
 spawn = require('child_process').spawn;
 
 servers = [];
+
+preparePort = function(serverId){
+  Options.findOne({option_name:'port_number'}).exec(function(err, record){
+    sails.log(record);
+    var currentPort = parseInt(record.option_value);
+    sails.log('El ultimo puerto abierto es : ' + currentPort);
+    var currentPort = currentPort + 1;
+    sails.log('El ultimo puerto abierto es actualizado: ' + currentPort);
+    var c = exec('sudo iptables -A INPUT -p tcp --dport '+currentPort+' -j ACCEPT',{async:true});
+    c.stdout.on('data',function(data){
+      c.stdout.write('by45nt5k4n');
+    });
+    record.option_value = currentPort.toString();
+    record.save();
+    Server.update(serverId,{port:currentPort}).exec(function(err, record){});
+    return true;
+  })
+}
 
 create = function(){
   // User.findOneByEmail('shocuul@live.com',function(err, user){
@@ -76,7 +94,8 @@ connect = function(){
 
 module.exports = {
   connect : connect,
-  create : create
+  create : create,
+  preparePort : preparePort
 };
 
 
