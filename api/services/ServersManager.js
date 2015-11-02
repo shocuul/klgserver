@@ -12,7 +12,7 @@ preparePort = function(serverId){
     sails.log('El ultimo puerto abierto es actualizado: ' + currentPort);
     var c = exec('sudo iptables -A INPUT -p tcp --dport '+currentPort+' -j ACCEPT',{async:true});
     c.stdout.on('data',function(data){
-      c.stdout.write('by45nt5k4n');
+      // c.stdin.write('by45nt5k4n');
     });
     record.option_value = currentPort.toString();
     record.save();

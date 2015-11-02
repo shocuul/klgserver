@@ -16,11 +16,21 @@ module.exports = {
 			if(!server) return res.json(301,'No se encuentra el servidor');
 			if(server.ready){
 				server.startServer();
+				res.json(301,'Servidor Iniciado');
 			}else{
 				res.json(301,'El servidor aun no esta preparado');
 			}
 		})
-		res.json(301,'Request'+req.params.id)
+	},
+	stop:function(req, res){
+		Server.findOne(req.params.idServer).exec(functon(err, server){
+			if(err) return res.json(301,'Error interno');
+			if(!server) return res.json(301, 'No se encuentra el servidor');
+			if(server.ready){
+				server.stopServer();
+
+			}
+		})
 	},
 	new:function(req, res){
 		var files = ls('.');

@@ -46,7 +46,11 @@ module.exports = {
     startServer:function(){
       var shell = require('shelljs');
       shell.cd(this.base_dir);
-      shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.configuration.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' '+this.configuration.extraParams+'',{async:true});
+      shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' ',{async:true});
+      sails.log(this.id);
+    },
+    stopServer:function(){
+      exec('screen -r "'+this.name+'" -X quit');
     }
   },
   afterUpdate:function(record, cb){

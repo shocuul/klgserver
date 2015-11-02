@@ -36,7 +36,8 @@ module.exports.routes = {
     view: 'homepage'
   },
   'POST /server/:id/start':'ServerController.start',
-  'POST /user/:idUser/servers/:idServer/start':'ServerController.start'
+  'POST /user/:idUser/servers/:idServer/start':'ServerController.start',
+  'POST /user/:idUser/servers/:idServer/stop':'ServerController.stop'
 
   /***************************************************************************
   *                                                                          *
