@@ -44,7 +44,7 @@ module.exports = {
 		res.send(fs.readFileSync(req.body.resource,'UTF-8'));	
 	},
 	stop:function(req, res){
-		Server.findOne(req.params.idServer).exec(functon(err, server){
+		Server.findOne(req.params.idServer).exec(function(err, server){
 			if(err) return res.json(301,'Error interno');
 			if(!server) return res.json(301, 'No se encuentra el servidor');
 			if(server.ready){

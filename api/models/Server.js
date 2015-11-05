@@ -18,6 +18,10 @@ module.exports = {
   		enum:['minecraft','cs16','csgo'],
   		required:true
   	},
+    game_type:{
+      type:'string',
+      enum:['spigot','craftbukkit']
+    },
     port:{
       type:'integer'
     },
@@ -46,7 +50,23 @@ module.exports = {
     startServer:function(){
       var shell = require('shelljs');
       shell.cd(this.base_dir);
-      shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' ',{async:true});
+      switch(this.game){
+        case 'cs16':
+          shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' ',{async:true});
+          break;
+        case 'minecraft':
+          sails.log('entramos a minecraft');
+          if(this.game_type == 'spigot'){
+            sails.log('Entramos a spigot');
+            shell.exec('screen -AmdS '+this.name+' java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar spigot-1.8.8.jar --port ' + this.port +'');
+            var console = shell.exec('screen -r "'+this.name+'"',{async:true});
+            console.stdout.on('data',function(data){
+              Serverlog.create({message:data,by:this.id}).exec(function(err,log){});
+            });
+            break;
+          }
+      }
+
       sails.log(this.id);
     },
     stopServer:function(){
@@ -116,6 +136,22 @@ module.exports = {
               });
             })
             break;
+          case 'minecraft':
+            if(record.game_type == 'spigot'){
+              var copy = exec('cp '+sails.config.server.minecraft.spigot+' '+baseDir+'; echo "Copia completa";',{async:true});
+              var fs = require('fs');
+              fs.writeFile(''+baseDir+'/eula.txt','eula=true',function(err){
+                if(err) sails.log.error(err);
+              })
+              copy.stdout.on('data',function(data){
+                Serverlog.create({message:data, by: record.id}).exec(function(err,log){});
+                Server.update({id:record.id},{ready:true}).exec(function(err, update){
+                  if(err){
+                    return;
+                  }
+                })
+              })
+            }
           default:
         }
         ServersManager.preparePort(record.id)
