@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 require('shelljs/global');
+var fs = require('fs');
+var path = require('path');
 module.exports = {
 	create:function(req,res){
 		res.json(301,'No se pueden crear servidores de esta forma');
@@ -22,6 +24,25 @@ module.exports = {
 			}
 		})
 	},
+	getTree:function(req, res){
+		var _p;
+		if(!req.param('id')){
+			Server.findOne(req.params.idServer).exec(function(err, server){
+				if(err) return res.json(301, 'Error internot');
+				if(!server) return res.json(301, 'No se encuentra el servidor');
+				if(server.ready){
+					_p = path.resolve(server.base_dir);
+					processReq(_p, res);
+				}
+			})
+		}else{
+			_p = req.param('id');
+			processReq(_p, res);
+		}
+	},
+	getResource:function(req, res){
+		res.send(fs.readFileSync(req.body.resource,'UTF-8'));	
+	},
 	stop:function(req, res){
 		Server.findOne(req.params.idServer).exec(functon(err, server){
 			if(err) return res.json(301,'Error interno');
@@ -30,7 +51,7 @@ module.exports = {
 				server.stopServer();
 
 			}
-		})
+		});
 	},
 	new:function(req, res){
 		var files = ls('.');
@@ -39,3 +60,32 @@ module.exports = {
 		return res.json({success:'Server Created'});
 	}
 };
+
+function processReq(_p, res){
+	var resp = [];
+	fs.readdir(_p, function(err, list){
+		for(var i = list.length - 1; i >= 0; i--){
+			resp.push(processNode(_p, list[i]));
+		}
+		res.json(resp);
+	})
+}
+
+function processNode(_p, f){
+	var s = fs.statSync(path.join(_p, f));
+	return {
+		"id":path.join(_p,f),
+		"text":f,
+		"icon":s.isDirectory() ? 'jstree-custom-folder' : 'jstree-custom-file',
+		"state":{
+			"opened":false,
+			"disabled":false,
+			"selected":false
+		},
+		"li_attr":{
+			"base":path.join(_p,f),
+			"isLeaf":!s.isDirectory()
+		},
+		"children":s.isDirectory()
+	};
+}
