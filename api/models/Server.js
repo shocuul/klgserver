@@ -49,6 +49,7 @@ module.exports = {
     },
     startServer:function(){
       var shell = require('shelljs');
+      var spawn = require('child_process').spawn;
       shell.cd(this.base_dir);
       switch(this.game){
         case 'cs16':
@@ -58,10 +59,9 @@ module.exports = {
           sails.log('entramos a minecraft');
           if(this.game_type == 'spigot'){
             sails.log('Entramos a spigot');
-            shell.exec('screen -AmdS '+this.name+' java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar spigot-1.8.8.jar --port ' + this.port +'');
-            var console = shell.exec('screen -r "'+this.name+'"',{async:true});
-            console.stdout.on('data',function(data){
-              Serverlog.create({message:data,by:this.id}).exec(function(err,log){});
+            var processo = shell.exec('java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar spigot-1.8.8.jar --port ' + this.port +'',{async:true});
+            processo.stdout.on('data',function(data){
+              sails.log(data.toString());
             });
             break;
           }
