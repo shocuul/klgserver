@@ -10,7 +10,8 @@ angular.module('KLGServerApp')
     })
     .state('anon.home',{
       url:'/',
-      templateUrl:'home.html'
+      templateUrl:'home.html',
+      controller:'HomeController'
     })
     .state('anon.login',{
       url:'/login',

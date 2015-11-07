@@ -1,20 +1,23 @@
 <!-- Main Content -->
 <section class="content-wrap">
-
-  <!-- Banner -->
-  <div class="youplay-banner banner-top small">
-    <div class="image" style="background-image: url(/images/csgoBanner.jpg)" data-top="background-position: 50% 0px;" data-top-bottom="background-position: 50% -200px;">
-    </div>
-
-    <div class="info" data-top="opacity: 1; transform: translate3d(0px,0px,0px);" data-top-bottom="opacity: 0; transform: translate3d(0px,150px,0px);" data-anchor-target=".youplay-banner.banner-top">
-      <div>
-        <div class="container">
-          <h2>Blank Page</h2>
-        </div>
-      </div>
+  
+  <div class="tp-banner-container rs-youplay">
+    <div class="tp-banner">
+      <ul>
+        <li data-thumb="/images/csgoBanner.jpg" data-saveperformance="on" data-transition="random-static" data-slotamount="7" data-masterspeed="700">
+                      <img src="/images/csgoBanner.jpg" alt="" data-lazyload="/images/csgoBanner.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+        </li>
+        <li data-thumb="images/minecraftBanner.jpg" data-saveperformance="on" data-transition="random-static" data-slotamount="7" data-masterspeed="700">
+                      <img src="/images/minecraftBanner.jpg" alt="" data-lazyload="/images/minecraftBanner.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+        </li>
+        <li data-thumb="images/cs16Banner.jpg" data-saveperformance="on" data-transition="random-static" data-slotamount="7" data-masterspeed="700">
+                      <img src="/images/csgoBanner.jpg" alt="" data-lazyload="images/cs16Banner.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+        </li>
+      </ul>
+      <div class="tp-bannertimer"></div>
     </div>
   </div>
-  <!-- /Banner -->
+
 
 
   <div class="container youplay-content">
@@ -77,5 +80,12 @@
     </div>
   </footer>
   <!-- /Footer -->
+  <script>
+    if(typeof youplay !== 'undefined') {
+          youplay.init({
+              smoothscroll: false,
+          });
+      }
+  </script>
 
 </section>

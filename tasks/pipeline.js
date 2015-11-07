@@ -17,6 +17,7 @@
 var cssFilesToInject = [
   'styles/bootstrap.min.css',
   'styles/font-awesome.min.css',
+  'styles/settings.css',
   'styles/youplay.min.css',
   'styles/**/*.css'
 ];
@@ -33,6 +34,8 @@ var jsFilesToInject = [
   
   'js/dependencies/bootstrap.min.js',
   'js/dependencies/skrollr.min.js',
+  'js/dependencies/jquery.themepunch.tools.min.js',
+  'js/dependencies/jquery.themepunch.revolution.min.js',
   'js/dependencies/youplay.min.js',
   'js/dependencies/angular.min.js',
   'js/dependencies/angular-sails.min.js',
