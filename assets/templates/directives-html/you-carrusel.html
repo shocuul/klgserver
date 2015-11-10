@@ -1,5 +1,28 @@
 <div class="youplay-carousel">
-  <a class="angled-img" href="#!">
+  <a class="angled-img" href="#!" ng-repeat="server in servers" on-last-repeat>
+    <div class="img img-offset">
+      <img ng-src="{{server.image}}" alt="">
+      <div class="badge bg-default">
+        {{server.ram}}
+      </div>
+    </div>
+    <div class="bottom-info">
+      <h4>{{server.name}}</h4>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="rating">
+            <i class="fa fa-users"></i> {{server.players}} Jugadores
+          </div>
+        </div>
+      <div class="col-xs-6">
+        <div class="price">
+          {{server.price}}
+        </div>
+      </div>
+    </div>
+    </div>
+  </a>
+  <!-- <a class="angled-img" href="#!">
     <div class="img">
       <img src="images/minecraftServerBack.jpg" alt="">
     </div>
@@ -75,4 +98,42 @@
       </div>
     </div>
   </a>
+  <a class="angled-img" href="#!">
+    <div class="img">
+      <img src="images/minecraftServerBack.jpg" alt="">
+    </div>
+    <div class="over-info">
+      <div>
+        <div>
+          <h4>Dragons Dogma</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a class="angled-img" href="#!">
+    <div class="img">
+      <img src="images/minecraftServerBack.jpg" alt="">
+    </div>
+    <div class="over-info">
+      <div>
+        <div>
+          <h4>Dragons Dogma</h4>
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a> -->
 </div>
