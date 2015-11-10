@@ -1,9 +1,9 @@
 angular.module('KLGServerApp')
   .controller('HomeController', function($scope){
-    
-	  $scope.image = {
-		  csgo:'/images/csgoBanner.jpg',
-		  minecraft:'/images/minecraftBanner.jpg',
-		  cs16:'/images/cs16Banner.jpg'
-	  };
+    $scope.nombre = "Jose David"
+	  $scope.image = [
+		  '/images/csgoBanner.jpg',
+		  '/images/minecraftBanner.jpg',
+		  '/images/cs16Banner.jpg'
+	  ];
   });

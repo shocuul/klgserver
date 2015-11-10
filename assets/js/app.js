@@ -1,13 +1,14 @@
 angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages'])
   .run(function($rootScope,$state,Auth,CurrentUser){
     console.log("Works");
-  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams, youplay){
     if(!Auth.authorize(toState.data.access)){
       event.preventDefault();
       $state.go('anon.login');
     }
     $rootScope.currentUser = CurrentUser.user();
   });
+
 });
 
 angular.module('KLGServerApp')
