@@ -15,7 +15,7 @@ angular.module('KLGServerApp')
             navigationArrows:'solo',
             navigationStyle:'preview4',
             fullWidth: element.hasClass('rs-fullwidth')?'on':'off',
-            fullScreen: element.hasClass('rs-fullscreen')?'on':'off',
+            fullScreen: 'on',
             spinner:'spinner4'
         }
         element.find('.tp-banner').show().revolution(rsOptions)

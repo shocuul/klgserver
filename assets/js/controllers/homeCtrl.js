@@ -1,6 +1,72 @@
 angular.module('KLGServerApp')
   .controller('HomeController', function($scope){
-    $scope.nombre = "Jose David"
+    $scope.serversCS16 = [
+      {
+        name:'Counter Strike 1.6 Bronze',
+        image:'images/cs16ServerBack.jpg',
+        ram:'1GB',
+        players:'8',
+        price:'$10'
+      },
+      {
+        name:'Counter Strike 1.6 Bronze',
+        image:'images/cs16ServerBack.jpg',
+        ram:'2GB',
+        players:'16',
+        price:'$25'
+      },
+      {
+        name:'Counter Strike 1.6 Bronze',
+        image:'images/cs16ServerBack.jpg',
+        ram:'3GB',
+        players:'26',
+        price:'$30'
+      },
+      {
+        name:'Counter Strike 1.6 Bronze',
+        image:'images/cs16ServerBack.jpg',
+        ram:'4GB',
+        players:'32',
+        price:'$40'
+      }
+    ]
+    $scope.serversCSGO = [
+      {
+        name:'Counter Strike GO1',
+        image:'images/csgoServerBack.jpg',
+        ram:'1GB',
+        players:'8',
+        price:'$10'
+      },
+      {
+        name:'Counter Strike GO2',
+        image:'images/csgoServerBack.jpg',
+        ram:'2GB',
+        players:'16',
+        price:'$20'
+      },
+      {
+        name:'Counter Strike GO3',
+        image:'images/csgoServerBack.jpg',
+        ram:'4GB',
+        players:'24',
+        price:'$30'
+      },
+      {
+        name:'Counter Strike GO4',
+        image:'images/csgoServerBack.jpg',
+        ram:'8GB',
+        players:'36',
+        price:'$40'
+      },
+      {
+        name:'Counter Strike GO5',
+        image:'images/csgoServerBack.jpg',
+        ram:'16GB',
+        players:'48',
+        price:'$50'
+      }
+    ]
     $scope.serversMinecraft = [
       {
         name:'Minecraft 0.5',
