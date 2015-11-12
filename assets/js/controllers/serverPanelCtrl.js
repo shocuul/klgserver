@@ -1,6 +1,7 @@
 angular.module('KLGServerApp')
-  .controller('ServerDashboardCtrl',function($scope,$sails,$http,CurrentUser){
+  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser){
     //console.log("Iniciado");
+    $scope.imagenFondo = ""
     var userId = CurrentUser.user().id;
     console.log(userId);
     $scope.create = function(){

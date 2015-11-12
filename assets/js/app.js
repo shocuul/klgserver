@@ -1,6 +1,6 @@
-angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages'])
+angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap'])
   .run(function($rootScope,$state,Auth,CurrentUser){
-    console.log("Works");
+    console.log("¿Bienvenido a KLS que haces por aqui?");
   $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams, youplay){
     if(!Auth.authorize(toState.data.access)){
       event.preventDefault();

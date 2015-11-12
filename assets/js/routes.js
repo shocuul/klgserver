@@ -47,8 +47,8 @@ angular.module('KLGServerApp')
         }
       })
       .state('server.dashboard',{
-        url:'/servers',
-        templateUrl:'server/dashboard.html',
+        url:'/server/:idServer',
+        templateUrl:'server/panel.html',
         controller:'ServerDashboardCtrl'
       });
 
