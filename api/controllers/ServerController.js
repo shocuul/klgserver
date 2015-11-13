@@ -41,7 +41,7 @@ module.exports = {
 		}
 	},
 	getResource:function(req, res){
-		res.send(fs.readFileSync(req.body.resource,'UTF-8'));	
+		res.send(fs.readFileSync(req.body.resource,'UTF-8'));
 	},
 	stop:function(req, res){
 		Server.findOne(req.params.idServer).exec(function(err, server){

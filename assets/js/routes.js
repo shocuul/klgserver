@@ -49,7 +49,7 @@ angular.module('KLGServerApp')
       .state('server.dashboard',{
         url:'/server/:idServer',
         templateUrl:'server/panel.html',
-        controller:'ServerDashboardCtrl'
+        controller:'ServerPanelCtrl'
       });
 
     $urlRouterProvider.otherwise('/');
