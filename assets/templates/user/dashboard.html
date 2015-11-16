@@ -27,44 +27,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr> <!-- NG REPEAT -->
-            <th scope="row">shocs164re3</th>
-            <td><span class="label label-success">Activo</span></td>
+          <tr ng-repeat="server in servers"> <!-- NG REPEAT -->
+            <th scope="row">{{server.name}}</th>
+            <td><span class="label label-success">{{server.ready}}</span></td>
             <td>
-              Counter Strike 1.6
+              {{server.game}}
             </td>
             <td>192.168.1.123</td>
-            <td>94000</td>
+            <td>{{server.port}}</td>
             <td><span class="label label-info">Detenido</span></td>
             <td><a href="#/server/10" class="btn btn-success btn-xs">Panel</a>
             <a href="#!" class="btn btn-xs">Editar</a>
-          <a href="#!" class="btn btn-danger btn-xs">Eliminar</a></td>
-          </tr>
-          <tr>
-            <th scope="row">shominecraft24rq</th>
-            <td><span class="label label-success">Activo</span></td>
-            <td>
-              Minecraft
-            </td>
-            <td>192.168.1.123</td>
-            <td>94010</td>
-            <td><span class="label label-info">Detenido</span></td>
-            <td><a href="#!" class="btn btn-success btn-xs">Panel</a>
-            <a href="#!" class="btn btn-xs">Editar</a>
-          <a href="#!" class="btn btn-danger btn-xs">Eliminar</a></td>
-          </tr>
-          <tr>
-            <th scope="row">shocsgo4re3</th>
-            <td><span class="label label-success">Activo</span></td>
-            <td>
-              Counter Strike GO
-            </td>
-            <td>192.168.1.123</td>
-            <td>94100</td>
-            <td><span class="label label-info">Detenido</span></td>
-            <td><a href="#!" class="btn btn-success btn-xs">Panel</a>
-            <a href="#!" class="btn btn-xs">Editar</a>
-          <a href="#!" class="btn btn-danger btn-xs">Eliminar</a></td>
+            <a ng-click="delete(server)" class="btn btn-danger btn-xs">Eliminar</a></td>
           </tr>
         </tbody>
       </table>

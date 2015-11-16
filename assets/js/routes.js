@@ -35,7 +35,12 @@ angular.module('KLGServerApp')
       .state('user.dashboard',{
         url:'/dashboard',
         templateUrl:'user/dashboard.html',
-        controller:'DashboardCtrl'
+        controller:'DashboardCtrl',
+        resolve:{
+        servers:function(ServerService){
+             return ServerService.getAll();
+           }
+        }
       });
 
     $stateProvider

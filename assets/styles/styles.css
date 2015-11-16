@@ -14,3 +14,7 @@
 .angleg-content{
   padding: 1em;
 }
+
+.youplay-select option {
+	color: #fff;
+}

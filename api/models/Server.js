@@ -20,7 +20,7 @@ module.exports = {
   	},
     game_type:{
       type:'string',
-      enum:['spigot','craftbukkit']
+      enum:['spigot','craftbukkit','vanilla']
     },
     port:{
       type:'integer'
