@@ -11,7 +11,7 @@ module.exports = {
 
 	index: function(req, res){
 		sails.log("Ejecute el Index");
-		sails.log(req.params());
+		sails.log(req.params);
 		Server.watch(req.socket);
 		Server.find({}).exec(function findServer(err, foundServer){
 			Server.subscribe(req.socket, foundServer);

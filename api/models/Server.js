@@ -77,8 +77,10 @@ module.exports = {
     sails.log(record)
     if(record.owner == null){
       sails.log("Entro a record.owner == null");
-      Server.destroy(record.id).exec(function(err, record){
-        if(err){cb(err);}else { cb(); }
+      Server.destroy(record.id).exec(function(err, deleterecord){
+        if(err){cb(err);}else {
+          Server.publishDestroy(record.id);
+          cb(); }
       });
     }else{
       cb();

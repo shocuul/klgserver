@@ -3,17 +3,22 @@ angular.module('KLGServerApp')
 		var currentUser = CurrentUser.user;
 		var UserServers = UserServers || [];
 		(function(){
-			$sails.on("server", function (message) {
-				console.log("Estoy en el on");
-				console.log(message);
-			});
+
 		})
 		return{
 			getAll: function(){
-				return $http.get('/user/'+currentUser().id+'/servers').then(function(response){
+				return $sails.get('/user/'+currentUser().id+'/servers').then(function(response){
+					// return $sails.get('/server/').then(function(response){
 					UserServers = response.data;
-					//console.log(response.data);
-					return UserServers
+					 $sails.on("server", function (message) {
+					 	console.log("Estoy en el getAll");
+					 	console.log(message);
+					});
+
+
+					return UserServers;
+				},function(response){
+					console.log("Error en getAll Server Service");
 				});
 			},
 			create: function(newServer){

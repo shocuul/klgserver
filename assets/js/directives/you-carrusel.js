@@ -9,7 +9,7 @@ angular.module('KLGServerApp')
       templateUrl:'directives-html/you-carrusel.html',
       link:function(scope, element, atts){
         if (scope.$last) {
-          console.log("Ultimo repeat")
+          //console.log("Ultimo repeat")
           element.owlCarousel({
               loop:true,
               stagePadding: 70,
