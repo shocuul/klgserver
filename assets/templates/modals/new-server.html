@@ -27,6 +27,6 @@
   </p>
 </div>
 <div class="modal-footer">
-  <button class="btn" type="button" ng-click="ok()"> Crear </button>
+  <button class="btn" type="button" ng-click="ok($event); $event.stopPropagation();"> Crear </button>
   <button class="btn" type="button" ng-click="cancel()"> Cancelar </button>
 </div>

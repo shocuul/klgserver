@@ -14,8 +14,6 @@ module.exports = {
 		Server.watch(req.socket);
 
 		var ownerId = req.param('idUser');
-		sails.log("Estoy en getServers");
-		sails.log(req.socket.id);
 		Server.find({ owner: ownerId }).exec(function (err, foundServers) {
 			sails.log(foundServers);
 			Server.subscribe(req.socket, foundServers);
@@ -23,6 +21,7 @@ module.exports = {
 		})
 	},
 	createServer: function (req, res) {
+		var sId = '';
 		var game = req.body.game;
 		var game_type = req.body.game_type ? req.body.game_type : null;
 		var num_player = req.body.num_player;
@@ -31,43 +30,26 @@ module.exports = {
 			serverName = serverName.concat(game).concat(Utils.klsclave());
 			var baseDir = sails.config.server.serverBaseDir + serverName;
 			mkdir('-p', baseDir);
-			var port = ServersManager.preparePort();
-			Server.create({
-				name:serverName,
-				game:game,
-				game_type: game_type,
-				port: port,
-				ip:sails.config.server.ip,
-				base_dir:baseDir,
-				num_player:num_player,
-				owner:user.id
-			}).exec(function(err, newServer){
-				Server.publishCreate(newServer);
-				res.json(newServer);
-			})
+			ServersManager.preparePort().then(function(port){
+				var port = port;
+				Server.create({
+					name:serverName,
+					game:game,
+					game_type: game_type,
+					port: port,
+					ip:sails.config.server.ip,
+					base_dir:baseDir,
+					num_player:num_player,
+					owner:user.id
+				}).then(function(newServer){
+					Server.publishCreate(newServer);
+					sId = newServer.id;
+					res.json(newServer);
+				},function(err){
+					res.negotiate(err);
+				})
+			});
 			// Se crean las diferentes configuraciones por cada juego
-			sails.log("Estoy en el switch");
-			switch(game){
-				case 'cs16':
-					break;
-				case 'minecraft':
-					switch(game_type){
-						case 'spigot':
-							var copy = exec('cp '+sails.config.server.minecraft.spigot+' '+baseDir+'; echo "Copia Completa";',{async:true});
-							var fs = require('fs');
-							fs.writeFile(baseDir+'/eula.txt','eula=true',function(err){
-								if(err) res.negotiate(err);
-							})
-							
-					}
-					break;
-				case 'csgo':
-					break;
-			}
-			
-			
-		})
-		sails.log(req.body);
 	}
 
 };

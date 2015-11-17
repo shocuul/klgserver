@@ -4,20 +4,28 @@ spawn = require('child_process').spawn;
 servers = [];
 
 preparePort = function(){
-  Options.findOne({option_name:'port_number'}).exec(function(err, record){
-    sails.log(record);
-    var currentPort = parseInt(record.option_value);
-    sails.log('El ultimo puerto abierto es : ' + currentPort);
-    var currentPort = currentPort + 1;
-    sails.log('El ultimo puerto abierto es actualizado: ' + currentPort);
-    var c = exec('sudo iptables -A INPUT -p tcp --dport '+currentPort+' -j ACCEPT',{async:true});
-    c.stdout.on('data',function(data){
-      // c.stdin.write('by45nt5k4n');
-    });
-    record.option_value = currentPort.toString();
-    record.save();
-    return currentPort;
-  })
+  var Promise = require('promise');
+  var deferred = new Promise(function(resolve, reject){
+    Options.findOne({option_name:'port_number'}).exec(function(err, record){
+      sails.log(record);
+      var currentPort = parseInt(record.option_value);
+      sails.log('El ultimo puerto abierto es : ' + currentPort);
+      var currentPort = currentPort + 1;
+      sails.log('El ultimo puerto abierto es actualizado: ' + currentPort);
+      var c = exec('sudo iptables -A INPUT -p tcp --dport '+currentPort+' -j ACCEPT',{async:true});
+      c.stdout.on('data',function(data){
+        // c.stdin.write('by45nt5k4n');
+      });
+      record.option_value = currentPort.toString();
+      record.save().then(function(update){
+        resolve(update.option_value);
+      },function(err){
+        reject(err)
+      });
+    })
+  });
+  return deferred;
+
 }
 
 create = function(){

@@ -1,10 +1,6 @@
 angular.module('KLGServerApp')
   .controller('DashboardCtrl', function($scope, $uibModal, ServerService, servers){
     $scope.servers = servers;
-    var socket = io.connect('http://localhost:1337');
-    socket.on('server',function(obj){
-      console.log(obj);
-    });
     $scope.delete = function(server){
       ServerService.remove(server);
     }
@@ -67,5 +63,10 @@ angular.module('KLGServerApp')
     }
     $scope.cancel = function(){
       $uibModalInstance.dismiss('cancel');
+    }
+  })
+  .filter('progress',function($sce){
+    return function(status){
+      return !status ? $sce.trustAsHtml('<span class="label label-info">Instalando</span>') : $sce.trustAsHtml('<span class="label label-success">Completo</span>');
     }
   });

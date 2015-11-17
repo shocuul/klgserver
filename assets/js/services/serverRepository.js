@@ -10,6 +10,7 @@ angular.module('KLGServerApp')
 				return $sails.get('/user/'+currentUser().id+'/servers').then(function(response){
 					// return $sails.get('/server/').then(function(response){
 					UserServers = response.data;
+					console.log(response.data);
 					 $sails.on("server", function (message) {
 						 console.log(message);
 					 	if(message.verb == "destroyed"){
@@ -17,7 +18,10 @@ angular.module('KLGServerApp')
 							 UserServers.splice(index, 1);
 							 console.log(UserServers);
 						 }else if(message.verb == "created"){
-							 
+							 UserServers.push(message.data);
+						 }else if(message.verb == "updated"){
+							 var index = $filter('getIndex')(UserServers, parseInt(message.id,10));
+							 UserServers.splice(index,1,message.data);
 						 }
 					});
 
