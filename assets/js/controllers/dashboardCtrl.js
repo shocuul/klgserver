@@ -22,7 +22,6 @@ angular.module('KLGServerApp')
   .controller('CreateServerModalCtrl',function($scope, $uibModalInstance,$rootScope){
     $scope.alerts = [];
     $scope.server = {};
-    $scope.server.owner = $rootScope.currentUser.id;
     $scope.avaliableServers = [
       {
         server:'csgo',

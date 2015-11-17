@@ -25,6 +25,9 @@ module.exports = {
     port:{
       type:'integer'
     },
+    ip:{
+      type:'string'
+    },
     ready:{
       type:'boolean',
       defaultsTo:false
@@ -88,15 +91,6 @@ module.exports = {
   },
   //Antes de crear un servidor
   beforeCreate:function(values, cb){
-    switch(values.game){
-      case 'cs16':
-        break;
-      case 'csgo':
-        break;
-      default:
-        sails.log.error('Algo salio mal en beforeCreate de Servers');
-        break;
-    }
     cb();
   },
   beforeDestroy:function(values, cb){
@@ -108,60 +102,60 @@ module.exports = {
   },
   // Despues de crear un servidor
   afterCreate:function(record, cb){
-    sails.log.warn(record.id)
-    var serverName = '';
-    Server.findOne(record.id).exec(function(err, record){
-      User.findOne(record.owner).exec(function(err, user){
-        serverName = user.email.substring(0,3);
-        serverName = serverName.concat(record.game).concat(Utils.klsclave());
-        record.name = ''+serverName;
-        baseDir = sails.config.server.serverBaseDir + serverName;
-        record.base_dir = baseDir;
-        mkdir('-p',baseDir);
-        sails.log(record.game);
-        switch (record.game) {
-          case 'cs16':
-            // cp('-Rf',''+sails.config.server.cs16BaseDir+'',''+baseDir+'');
-            var cs16config ={
-              'daemon_game':'hlds_run -game cstrike',
-              'map':'de_dust',
-              'extraParams':'-pingboost 3 -autoupdate -console'
-            }
-            record.configuration = cs16config;
-            var copy = exec('cp -Rf '+sails.config.server.cs16BaseDir+'* '+baseDir+'; echo "Copia completa";',{async:true});
-            copy.stdout.on('data',function(data){
-              Serverlog.create({message:data,by:record.id}).exec(function(err,log){});
-              Server.update({id:record.id},{ready:true}).exec(function(err,update){
-                if(err){
-                  return;
-                }
-              });
-            })
-            break;
-          case 'minecraft':
-            if(record.game_type == 'spigot'){
-              var copy = exec('cp '+sails.config.server.minecraft.spigot+' '+baseDir+'; echo "Copia completa";',{async:true});
-              var fs = require('fs');
-              fs.writeFile(''+baseDir+'/eula.txt','eula=true',function(err){
-                if(err) sails.log.error(err);
-              })
-              copy.stdout.on('data',function(data){
-                Serverlog.create({message:data, by: record.id}).exec(function(err,log){});
-                Server.update({id:record.id},{ready:true}).exec(function(err, update){
-                  if(err){
-                    return;
-                  }
-                })
-              })
-            }
-          default:
-        }
-        ServersManager.preparePort(record.id)
-        record.save();
-        sails.log("Salve")
+    //sails.log.warn(record.id)
+    // var serverName = '';
+    // Server.findOne(record.id).exec(function(err, record){
+    //   User.findOne(record.owner).exec(function(err, user){
+    //     serverName = user.email.substring(0,3);
+    //     serverName = serverName.concat(record.game).concat(Utils.klsclave());
+    //     record.name = ''+serverName;
+    //     baseDir = sails.config.server.serverBaseDir + serverName;
+    //     record.base_dir = baseDir;
+    //     mkdir('-p',baseDir);
+    //     sails.log(record.game);
+    //     switch (record.game) {
+    //       case 'cs16':
+    //         // cp('-Rf',''+sails.config.server.cs16BaseDir+'',''+baseDir+'');
+    //         var cs16config ={
+    //           'daemon_game':'hlds_run -game cstrike',
+    //           'map':'de_dust',
+    //           'extraParams':'-pingboost 3 -autoupdate -console'
+    //         }
+    //         record.configuration = cs16config;
+    //         var copy = exec('cp -Rf '+sails.config.server.cs16BaseDir+'* '+baseDir+'; echo "Copia completa";',{async:true});
+    //         copy.stdout.on('data',function(data){
+    //           Serverlog.create({message:data,by:record.id}).exec(function(err,log){});
+    //           Server.update({id:record.id},{ready:true}).exec(function(err,update){
+    //             if(err){
+    //               return;
+    //             }
+    //           });
+    //         })
+    //         break;
+    //       case 'minecraft':
+    //         if(record.game_type == 'spigot'){
+    //           var copy = exec('cp '+sails.config.server.minecraft.spigot+' '+baseDir+'; echo "Copia completa";',{async:true});
+    //           var fs = require('fs');
+    //           fs.writeFile(''+baseDir+'/eula.txt','eula=true',function(err){
+    //             if(err) sails.log.error(err);
+    //           })
+    //           copy.stdout.on('data',function(data){
+    //             Serverlog.create({message:data, by: record.id}).exec(function(err,log){});
+    //             Server.update({id:record.id},{ready:true}).exec(function(err, update){
+    //               if(err){
+    //                 return;
+    //               }
+    //             })
+    //           })
+    //         }
+    //       default:
+    //     }
+    //     ServersManager.preparePort(record.id)
+    //     record.save(function(err, s){
+    //       sails.log(s);
+    //       Server.publishCreate(s);
+    //     });
+    //     sails.log("Salve")
         cb();
-      });
-    });
-
   }
 };

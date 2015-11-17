@@ -3,7 +3,7 @@ spawn = require('child_process').spawn;
 
 servers = [];
 
-preparePort = function(serverId){
+preparePort = function(){
   Options.findOne({option_name:'port_number'}).exec(function(err, record){
     sails.log(record);
     var currentPort = parseInt(record.option_value);
@@ -16,8 +16,7 @@ preparePort = function(serverId){
     });
     record.option_value = currentPort.toString();
     record.save();
-    Server.update(serverId,{port:currentPort}).exec(function(err, record){});
-    return true;
+    return currentPort;
   })
 }
 

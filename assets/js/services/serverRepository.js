@@ -1,5 +1,5 @@
 angular.module('KLGServerApp')
-	.factory('ServerService',function($http,CurrentUser,$sails){
+	.factory('ServerService',function($http,CurrentUser,$sails, $filter){
 		var currentUser = CurrentUser.user;
 		var UserServers = UserServers || [];
 		(function(){
@@ -11,8 +11,14 @@ angular.module('KLGServerApp')
 					// return $sails.get('/server/').then(function(response){
 					UserServers = response.data;
 					 $sails.on("server", function (message) {
-					 	console.log("Estoy en el getAll");
-					 	console.log(message);
+						 console.log(message);
+					 	if(message.verb == "destroyed"){
+							 var index = $filter('getIndex')(UserServers, parseInt(message.id,10));
+							 UserServers.splice(index, 1);
+							 console.log(UserServers);
+						 }else if(message.verb == "created"){
+							 
+						 }
 					});
 
 
@@ -27,5 +33,17 @@ angular.module('KLGServerApp')
 			remove: function(server){
 				return $http.delete('/user/'+currentUser().id+'/servers/'+server.id);
 			}
+		}
+	})
+	.filter('getIndex', function(){
+		return function(input, id){
+			var i = 0,
+				len = input.length;
+			for(; i < len; i++){
+				if(+input[i].id == +id){
+					return i;
+				}
+			}
+			return null;
 		}
 	});

@@ -40,7 +40,8 @@ module.exports.routes = {
   'POST /user/:idUser/servers/:idServer/stop':'ServerController.stop',
   'GET /user/:idUser/servers/:idServer/tree':'ServerController.getTree',
   'GET /user/:idUser/servers/:idServer/resource':'ServerController.getResource',
-  'GET /user/:idUser/servers':'UserController.getServers'
+  'GET /user/:idUser/servers':'UserController.getServers',
+  'POST /user/:idUser/servers':'UserController.createServer'
 
 
   /***************************************************************************
