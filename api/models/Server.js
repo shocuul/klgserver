@@ -77,9 +77,9 @@ module.exports = {
     }
   },
   afterUpdate:function(record, cb){
-    sails.log(record)
+    //sails.log(record)
     if(record.owner == null){
-      sails.log("Entro a record.owner == null");
+      //sails.log("Entro a record.owner == null");
       Server.destroy(record.id).exec(function(err, deleterecord){
         if(err){cb(err);}else {
           Server.publishDestroy(record.id);
@@ -94,7 +94,7 @@ module.exports = {
     cb();
   },
   beforeDestroy:function(values, cb){
-    sails.log(values.where.id)
+    //sails.log(values.where.id)
     Server.findOne(values.where.id).exec(function(err, record){
       rm('-Rf',record.base_dir);
       cb();
@@ -103,6 +103,37 @@ module.exports = {
   // Despues de crear un servidor
   afterCreate:function(record, cb){
     //sails.log.warn(record.id)
+    mkdir('-p', record.base_dir);
+    switch (record.game) {
+      case 'cs16':
+
+
+        break;
+      case 'csgo':
+        break;
+      case 'minecraft':
+        switch (record.game_type) {
+          case 'spigot':
+            var copy = exec('cp '+sails.config.server.minecraft.spigot+' '+record.base_dir+'; echo "Copia completa";',{async:true});
+            var fs = require('fs');
+            fs.writeFile(''+record.base_dir+'/eula.txt','eula=true',function(err){
+              if(err) sails.log.error(err);
+            })
+            copy.stdout.on('data',function(data){
+              Server.update({id:record.id},{ready:true}).exec(function(err,update){
+                sails.log.warn(update);
+                if(err){return;}
+                Server.publishUpdate(record.id,{ready:true});
+              });
+            })
+            break;
+          default:
+
+        }
+        break;
+      default:
+
+    }
     // var serverName = '';
     // Server.findOne(record.id).exec(function(err, record){
     //   User.findOne(record.owner).exec(function(err, user){

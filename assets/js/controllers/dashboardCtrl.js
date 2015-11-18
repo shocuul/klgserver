@@ -10,14 +10,13 @@ angular.module('KLGServerApp')
         templateUrl:'modals/new-server.html',
         controller:'CreateServerModalCtrl'
       });
-      modalInstance.result.then(function(server){
-        ServerService.create(server);
+      modalInstance.result.then(function(){
+
       })
     }
   })
-  .controller('CreateServerModalCtrl',function($scope, $uibModalInstance,$rootScope){
+  .controller('CreateServerModalCtrl',function($scope, $uibModalInstance,$rootScope, ServerService){
     $scope.alerts = [];
-    $scope.server = {};
     $scope.avaliableServers = [
       {
         server:'csgo',
@@ -57,7 +56,8 @@ angular.module('KLGServerApp')
         $scope.alerts.push({msg:'No a introducido el numero de jugadores'});
       }else{
         //console.log($scope.server);
-        $uibModalInstance.close($scope.server);
+        ServerService.create($scope.server);
+        $uibModalInstance.close();
       }
 
     }

@@ -29,7 +29,6 @@ module.exports = {
 			var serverName = user.email.substring(0, 3);
 			serverName = serverName.concat(game).concat(Utils.klsclave());
 			var baseDir = sails.config.server.serverBaseDir + serverName;
-			mkdir('-p', baseDir);
 			ServersManager.preparePort().then(function(port){
 				var port = port;
 				Server.create({
@@ -42,14 +41,15 @@ module.exports = {
 					num_player:num_player,
 					owner:user.id
 				}).then(function(newServer){
+					sails.log("servidor creado");
 					Server.publishCreate(newServer);
 					sId = newServer.id;
 					res.json(newServer);
 				},function(err){
+					sails.log("Error en la creacion del servidor");
 					res.negotiate(err);
 				})
-			});
-			// Se crean las diferentes configuraciones por cada juego
+			})
+		})
 	}
-
-};
+}

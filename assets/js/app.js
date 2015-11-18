@@ -13,7 +13,7 @@ angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages
 
 angular.module('KLGServerApp')
   .config(['$sailsProvider', function($sailsProvider){
-    $sailsProvider.url = 'http://localhost:1337';
+    $sailsProvider.url = '/';
   }]);
 
 // var app = angular.module('KLGServerApp', ['ngMaterial', 'ngSails']);

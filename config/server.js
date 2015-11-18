@@ -8,7 +8,8 @@ module.exports.server = {
 	steamCmdDir:'/home/Developer/SteamCMD',
 	minecraft:{
 		spigot:'/home/dev/Spigot/spigot-1.8.8.jar',
-		craftbukkit:'/home/dev/Spigot/craftbukkit-1.8.8.jar'
+		craftbukkit:'/home/dev/Spigot/craftbukkit-1.8.8.jar',
+		vanilla:'/home/dev/Spigot/minecraft_server.1.8.8.jar'
 		//spigot:'/home/developer/minecraft/spigot-1.8.8.jar',
 		//craftbukkit:'/home/developer/minecraft/craftbukkit-1.8.8.jar'
 	},//130
