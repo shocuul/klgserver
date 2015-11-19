@@ -19,4 +19,8 @@ angular.module('KLGServerApp')
                  console.log(data);
              });
     }
+  }).factory('ServerControl',function($sails){
+    return{
+      
+    }
   });

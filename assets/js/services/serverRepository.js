@@ -18,7 +18,10 @@ angular.module('KLGServerApp')
 							 UserServers.splice(index, 1);
 							 console.log(UserServers);
 						 }else if(message.verb == "created"){
-							 UserServers.push(message.data);
+							 // temporal fix to add dont owner server to list
+							 if(message.data.owner == currentUser().id){
+								 UserServers.push(message.data);
+							 }
 						 }else if(message.verb == "updated"){
 							 var index = $filter('getIndex')(UserServers, parseInt(message.id,10));
 							 UserServers.splice(index,1,message.data);

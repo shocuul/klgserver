@@ -112,24 +112,33 @@ module.exports = {
       case 'csgo':
         break;
       case 'minecraft':
+        var fs = require('fs');
+        fs.writeFile(''+record.base_dir+'/eula.txt','eula=true',function(err){
+          if(err) sails.log.error(err);
+        })
+        var copy;
+        // Copy installation files in server folder.
         switch (record.game_type) {
           case 'spigot':
-            var copy = exec('cp '+sails.config.server.minecraft.spigot+' '+record.base_dir+'; echo "Copia completa";',{async:true});
-            var fs = require('fs');
-            fs.writeFile(''+record.base_dir+'/eula.txt','eula=true',function(err){
-              if(err) sails.log.error(err);
-            })
-            copy.stdout.on('data',function(data){
-              Server.update({id:record.id},{ready:true}).exec(function(err,update){
-                sails.log.warn(update);
-                if(err){return;}
-                Server.publishUpdate(record.id,{ready:true});
-              });
-            })
+            copy = exec('cp '+sails.config.server.minecraft.spigot+' '+record.base_dir+'; echo "Copia completa";',{async:true});
+            break;
+          case 'craftbukkit':
+            copy = exec('cp '+sails.config.server.minecraft.craftbukkit+' '+record.base_dir+'; echo "Copia Completa";',{async:true});
+            break;
+          case 'vanilla':
+            copy = exec('cp '+sails.config.server.minecraft.vanilla+' '+record.base_dir+'; echo "Copia Completa";',{async:true});
             break;
           default:
-
+            sails.log("GameType Incompatible")
+            break;
         }
+        copy.stdout.on('data',function(data){
+          Server.update({id:record.id},{ready:true}).exec(function(err,update){
+            sails.log.warn(update);
+            if(err){return;}
+            Server.publishUpdate(record.id,{ready:true});
+          });
+        })
         break;
       default:
 

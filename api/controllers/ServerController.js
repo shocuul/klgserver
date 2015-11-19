@@ -36,6 +36,7 @@ module.exports = {
 		})
 	},
 	getTree:function(req, res){
+		sails.log.warn(req.params)
 		var _p;
 		if(!req.param('id')){
 			Server.findOne(req.params.idServer).exec(function(err, server){
