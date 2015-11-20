@@ -15,15 +15,15 @@
         <!--
                 -->
         <div class="user-data">
-          <h2>Shominecraftr422</h2>
-          <div class="location"><i class="fa fa-gamepad"></i> Minecraft</div>
+          <h2>{{server.name}}</h2>
+          <div class="location"><i class="fa fa-gamepad"></i> {{server.name}}</div>
           <div class="activity">
             <div>
-              <div class="num">192.168.1.234</div>
+              <div class="num">{{server.name}}</div>
               <div class="title">IP</div>
             </div>
             <div>
-              <div class="num">90041</div>
+              <div class="num">{{server.port}}</div>
               <div class="title">Puerto</div>
             </div>
             <div>
@@ -45,15 +45,19 @@
       <div class="row">
         <div class="col-md-6">
           <div class="angled-bg">
-            <div class="angled-title">Panel heading without title</div>
+            <div class="angled-title">Controles</div>
             <div class="angleg-content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <div class="center-block">
+                <a class="btn btn-default" ng-click="start()"> <i class="fa fa-play"></i> Iniciar</a>
+                <a class="btn btn-default" ng-click="restart()"><i class="fa fa-repeat"></i> Reiniciar</a>
+                <a class="btn btn-default" ng-click="stop()"><i class="fa fa-stop"></i> Detener</a>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-6">
           <div class="angled-bg">
-          <div class="angled-title">Panel heading without title</div>
+          <div class="angled-title">Grafica</div>
           <div class="angleg-content">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </div>

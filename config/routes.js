@@ -35,9 +35,8 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
-  'POST /server/:id/start':'ServerController.start',
-  'POST /user/:idUser/servers/:idServer/start':'ServerController.start',
-  'POST /user/:idUser/servers/:idServer/stop':'ServerController.stop',
+  'POST /server/:idServer/start':'ServerController.start',
+  'POST /server/:idServer/stop':'ServerController.stop',
   'POST /server/:idServer/tree':'ServerController.getTree',
   'POST /server/:idServer/resource':'ServerController.getResource',
   'GET /user/:idUser/servers':'UserController.getServers',

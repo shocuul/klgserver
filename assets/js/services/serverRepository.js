@@ -39,6 +39,9 @@ angular.module('KLGServerApp')
 			},
 			remove: function(server){
 				return $http.delete('/user/'+currentUser().id+'/servers/'+server.id);
+			},
+			checkifExist:function(idServer){
+				return $filter('getIndex')(UserServers, parseInt(idServer,10));
 			}
 		}
 	})

@@ -54,23 +54,25 @@ module.exports = {
       var shell = require('shelljs');
       var spawn = require('child_process').spawn;
       shell.cd(this.base_dir);
-      switch(this.game){
-        case 'cs16':
-          shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' ',{async:true});
-          break;
-        case 'minecraft':
-          sails.log('entramos a minecraft');
-          if(this.game_type == 'spigot'){
-            sails.log('Entramos a spigot');
-            var processo = shell.exec('java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar spigot-1.8.8.jar --port ' + this.port +'',{async:true});
-            processo.stdout.on('data',function(data){
-              sails.log(data.toString());
-            });
-            break;
-          }
-      }
-
-      sails.log(this.id);
+      sed('-i','max-players=[0-9][0-9]','max-players='+this.num_player,this.base_dir+'/server.properties');
+      sails.log("Inicio el server")
+      // switch(this.game){
+      //   case 'cs16':
+      //     shell.exec('screen -AmdS '+this.name+' ./'+this.configuration.daemon_game+' +ip '+sails.config.server.ip+' +port '+this.port+' +maxplayers '+this.max_player+' +map '+this.configuration.map+' ',{async:true});
+      //     break;
+      //   case 'minecraft':
+      //     sails.log('entramos a minecraft');
+      //     if(this.game_type == 'spigot'){
+      //       sails.log('Entramos a spigot');
+      //       var processo = shell.exec('java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar spigot-1.8.8.jar --port ' + this.port +'',{async:true});
+      //       processo.stdout.on('data',function(data){
+      //         sails.log(data.toString());
+      //       });
+      //       break;
+      //     }
+      // }
+      //
+      // sails.log(this.id);
     },
     stopServer:function(){
       exec('screen -r "'+this.name+'" -X quit');

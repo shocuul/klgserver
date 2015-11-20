@@ -1,34 +1,34 @@
 angular.module('KLGServerApp')
-  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, server){
+  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, selectServer, ServerControl){
     //console.log("Iniciado");
-    $scope.server = server
+    $scope.server = selectServer;
+    console.log($scope.server);
     $scope.imagenFondo = ""
-    var userId = CurrentUser.user().id;
-    console.log(userId);
-    $scope.create = function(){
-      console.log("enter");
-      var req = {
-                 method: 'POST',
-                 url: '/server/new'
-             };
-
-             $http(req)
-                 .success(function (data) {
-                 console.log(data);
-             })
-                 .error(function (data) {
-                 console.log(data);
-             });
+    $scope.start = function(){
+      console.log("Servidor Iniciado")
+      ServerControl.startServer()
+    }
+    $scope.restart = function(){
+      console.log("Servidor Reiniciado")
+    }
+    $scope.stop = function(){
+      console.log("Servidor Detenido")
     }
   }).factory('ServerControl',function($sails){
     var currentServer = currentServer || {};
     return{
       getServerInfo:function(idServer){
         return $sails.get('/server/'+idServer).then(function(response){
+          console.log(response)
           currentServer = response.data;
           return currentServer
         },function(err){
           console.log(err);
+        })
+      },
+      startServer:function(){
+        return $sails.post('/server/'+currentServer.id+'/start').then(function(response){
+          console.log(response)
         })
       }
     }

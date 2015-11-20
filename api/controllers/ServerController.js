@@ -24,6 +24,7 @@ module.exports = {
 	},
 	start:function(req,res){
 		//Agregar seguridad mas adelante
+		sails.log(req.params)
 		Server.findOne(req.params.idServer).exec(function(err, server){
 			if(err) return res.json(301,'Error interno');
 			if(!server) return res.json(301,'No se encuentra el servidor');
@@ -40,7 +41,7 @@ module.exports = {
 		var _p;
 		if(!req.param('id')){
 			Server.findOne(req.params.idServer).exec(function(err, server){
-				if(err) return res.json(301, 'Error internot');
+				if(err) return res.json(301, 'Error Interno');
 				if(!server) return res.json(301, 'No se encuentra el servidor');
 				if(server.ready){
 					_p = path.resolve(server.base_dir);

@@ -56,7 +56,7 @@ angular.module('KLGServerApp')
         templateUrl:'server/panel.html',
         controller:'ServerPanelCtrl',
         resolve:{
-          server:function($stateParams, ServerControl){
+          selectServer:function($stateParams, ServerControl){
             return ServerControl.getServerInfo($stateParams.idServer);
           }
         }
