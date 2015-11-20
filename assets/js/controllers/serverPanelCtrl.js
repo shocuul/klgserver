@@ -1,6 +1,7 @@
 angular.module('KLGServerApp')
-  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser){
+  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, server){
     //console.log("Iniciado");
+    $scope.server = server
     $scope.imagenFondo = ""
     var userId = CurrentUser.user().id;
     console.log(userId);
@@ -20,7 +21,15 @@ angular.module('KLGServerApp')
              });
     }
   }).factory('ServerControl',function($sails){
+    var currentServer = currentServer || {};
     return{
-      
+      getServerInfo:function(idServer){
+        return $sails.get('/server/'+idServer).then(function(response){
+          currentServer = response.data;
+          return currentServer
+        },function(err){
+          console.log(err);
+        })
+      }
     }
   });

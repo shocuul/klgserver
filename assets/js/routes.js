@@ -54,7 +54,12 @@ angular.module('KLGServerApp')
       .state('server.dashboard',{
         url:'/server/:idServer',
         templateUrl:'server/panel.html',
-        controller:'ServerPanelCtrl'
+        controller:'ServerPanelCtrl',
+        resolve:{
+          server:function($stateParams, ServerControl){
+            return ServerControl.getServerInfo($stateParams.idServer);
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');
