@@ -54,7 +54,7 @@ module.exports = {
       var shell = require('shelljs');
       var spawn = require('child_process').spawn;
       shell.cd(this.base_dir);
-      sed('-i','max-players=[0-9][0-9]','max-players='+this.num_player,this.base_dir+'/server.properties');
+      sed('-i','max-players=[0-9][0-9]+','max-players='+this.num_player,this.base_dir+'/server.properties');
       sails.log("Inicio el server")
       // switch(this.game){
       //   case 'cs16':
@@ -139,8 +139,23 @@ module.exports = {
             sails.log.warn(update);
             if(err){return;}
             Server.publishUpdate(record.id,{ready:true});
+            var shell = require('shelljs');
+            shell.cd(record.base_dir);
+            switch (record.game_type) {
+              //Falta agregar los otros daemon
+              case 'spigot':
+                    var processo = shell.exec('java -Xms512M -Xmx1024M -XX:MaxPermSize=128M -jar spigot-1.8.8.jar --port ' + record.port +'',{async:true, silent:true});
+                    processo.stdout.on('data',function(data){
+                      if((data.toString().indexOf("Done") > -1)){
+                        processo.kill()
+                      }
+                    });
+                break;
+              default:
+            }
           });
         })
+
         break;
       default:
 
