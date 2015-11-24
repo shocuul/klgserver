@@ -136,9 +136,7 @@ module.exports = {
         }
         copy.stdout.on('data',function(data){
           Server.update({id:record.id},{ready:true}).exec(function(err,update){
-            sails.log.warn(update);
             if(err){return;}
-            Server.publishUpdate(record.id,{ready:true});
             var shell = require('shelljs');
             shell.cd(record.base_dir);
             switch (record.game_type) {
@@ -148,6 +146,7 @@ module.exports = {
                     processo.stdout.on('data',function(data){
                       if((data.toString().indexOf("Done") > -1)){
                         processo.kill()
+                        Server.publishUpdate(record.id,{ready:true});
                       }
                     });
                 break;

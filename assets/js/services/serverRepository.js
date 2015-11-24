@@ -24,7 +24,9 @@ angular.module('KLGServerApp')
 							 }
 						 }else if(message.verb == "updated"){
 							 var index = $filter('getIndex')(UserServers, parseInt(message.id,10));
-							 UserServers.splice(index,1,message.data);
+							 var server = UserServers[index];
+							 server.ready = message.data.ready;
+							 UserServers.splice(index,1,server);
 						 }
 					});
 
