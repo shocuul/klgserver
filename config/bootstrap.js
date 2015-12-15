@@ -19,10 +19,10 @@ module.exports.bootstrap = function(cb) {
   //mkdir('-p','out/release');
   require('shelljs/global');
   if(!which('awk')){
-    sails.log.warning('No se encuentra el programa awk');
+    sails.log('No se encuentra el programa awk');
     exit(0);
   }else if (!which('screen')) {
-    sails.log.warning('No se encuentra el programa screen');
+    sails.log('No se encuentra el programa screen');
     exit(0);
   }else{
     ServersManager.create();

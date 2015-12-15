@@ -7,6 +7,7 @@ angular.module('KLGServerApp')
     Auth.login($scope.user).success(function(result){
       $state.go('user.dashboard');
     }).error(function(err){
+      console.log(err);
       $scope.errors.push(err);
     });
   }

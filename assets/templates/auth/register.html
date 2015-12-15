@@ -8,6 +8,9 @@
         <div class="container align-center">
           <div class="youplay-form">
             <h2 style="padding-bottom:1em;">Registro</h2>
+            <div ng-repeat="error in errors">
+              <span class="label label-warning">{{error.err}}</span>
+            </div>
             <form ng-submit="register()" name="registerForm" novalidate>
               <!-- Nombre -->
               <div class="youplay-input">

@@ -6,6 +6,9 @@
         <div class="container align-center">
           <div class="youplay-form">
             <h2 style="padding-bottom:1em;">Iniciar sesion</h2>
+            <div ng-repeat="error in errors">
+              <span class="label label-warning">{{error.err}}</span>
+            </div>
             <form ng-submit="login()" name="loginForm" novalidate>
               <!-- Cooreo Electronico -->
               <div class="youplay-input">
