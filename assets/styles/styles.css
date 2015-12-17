@@ -18,3 +18,59 @@
 .youplay-select option {
 	color: #fff;
 }
+
+.klg-input-group{
+  margin-bottom: 0;
+}
+
+.input-group-addon{
+  border: 1px solid whitesmoke !important;
+  border-radius:0;
+  transform: skew(-8deg);
+  color:inherit;
+  background: transparent none repeat scroll 0px 0px;
+}
+/*
+.input-group-addon::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: skew(-8deg);
+}
+*/
+.form-control{
+  position: relative;
+  resize: none;
+  width: 100%;
+  padding: 1rem 1.8rem;
+  display: block;
+  background: 0 0;
+  border: none;
+  outline: 0;
+  z-index: 2;
+  transition: .3s color ease;
+}
+
+.form-control::after{
+  content: '';
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  transform: skew(-8deg);
+  transition: .3s background ease;
+}
+
+.cell-info{
+  width: 72% !important;
+}
+
+.breadcrumb-item{
+  display: inline-block;
+}

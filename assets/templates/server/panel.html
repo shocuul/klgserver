@@ -66,7 +66,95 @@
 
     </uib-tab>
     <uib-tab heading="Archivos">
-      Archivos
+      <!-- Uploader Controls -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-files-o fa-fw"></i>
+            </span>
+            <div class="youplay-input klg-input-group">
+              <input type="text" placeholder="Drag files here" readonly="" event-focus>
+            </div>
+            <span class="input-group-btn">
+              <button class="btn btn-primaty" type="button"><i class="fa fa-upload fa-fw"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-folder-open-o fa-fw"></i>
+            </span>
+            <div class="youplay-input klg-input-group">
+              <input type="text" placeholder="Nuevo Directorio" event-focus>
+            </div>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button"><i class="fa fa-plus fa-fw"></i></button>
+            </span>
+          </div>
+        </div> 
+      </div>
+      <!-- Upload Control End -->
+      <!-- breadcrumb --->
+      <ul class="youplay-forum">
+        <li class="header">
+          <ul>
+              <li class="cell-icon"></li>
+              <li class="cell-info">
+                <div class="mt-10 mb-20 pull-left">
+                  <a href=""><i class="fa fa-folder-open"></i>Root</a>
+                  <span class="fa fa-angle-right"></span>
+                  <div class="breadcrumb-item" ng-repeat="item in breadcrumb">
+                    <a href="" ng-click="changeFolder(item, $index)"><i class="fa fa-folder-open"></i>{{item.text}}</a>
+                    <span class="fa fa-angle-right"></span> 
+                  </div>
+                </div>
+              </li>
+              <li class="cell-topic-count"><i class="fa fa-pencil"></i></li>
+              <li class="cell-reply-count"><i class="fa fa-trash-o"></i></li>
+            <!--<li class="cell-freshness">Freshness</li> -->
+          </ul>
+        </li>
+        <!-- Folder Controls -->
+        <li class="body">
+          <ul ng-repeat="folder in folders | filter: { children: true }">
+            <li class="cell-icon">
+              <i class="fa fa-folder-open-o"></i>
+            </li>
+            <li class="cell-info">
+              <a class="title h4" ng-click="getTree(folder)">{{folder.text}} </a>
+            </li>
+            <li class="cell-topic-count"><a href="" class="title"> <i class="fa fa-pencil-square-o"></i></a></li>
+            <li class="cell-reply-count"><a href="" class="title"> <i class="fa fa-times"></i></a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="youplay-forum">
+        <li class="header">
+          <ul>
+              <li class="cell-icon"></li>
+              <li class="cell-info">
+                Filename
+              </li>
+              <li class="cell-topic-count"><i class="fa fa-pencil"></i></li>
+              <li class="cell-reply-count"><i class="fa fa-trash-o"></i></li>
+            <!--<li class="cell-freshness">Freshness</li> -->
+          </ul>
+        </li>
+        <li class="body">
+          <ul ng-repeat="folder in folders | filter: { children: false }">
+            <li class="cell-icon">
+              <i class="fa fa-file-text-o"></i>
+            </li>
+            <li class="cell-info">
+              <a href="#" class="title h4">{{folder.text}} </a>
+            </li>
+            <li class="cell-topic-count"><a href="" class="title"> <i class="fa fa-pencil-square-o"></i></a></li>
+            <li class="cell-reply-count"><a href="" class="title"> <i class="fa fa-times"></i></a></li>
+          </ul>
+        </li>
+      </ul>
     </uib-tab>
     <uib-tab heading="Consola">
       Consola
