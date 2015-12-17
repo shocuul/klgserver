@@ -21,18 +21,37 @@ angular.module('KLGServerApp')
     $scope.stop = function(){
       console.log("Servidor Detenido")
     }
+    // File Manager Functions 
+    $scope.goToRoot = function(){
+      $scope.breadcrumb = [];
+      ServerControl.getTree().then(function(folders){
+        $scope.folders = folders;
+      });
+    }
     $scope.getTree = function(folder){
       
       $scope.breadcrumb.push(folder);
+      changueFolder(folder);
     }
     
     $scope.changeFolder = function(folder,$index){
       for (var index = $index+1; index <= $scope.breadcrumb.length; index++) {
         $scope.breadcrumb.splice(index, 1);
-        
       }
-      console.log($index);
+      changueFolder(folder);
     }
+    
+    function changueFolder(folder){
+      ServerControl.getTree(folder.id).then(function(folders){
+        $scope.folders = folders;
+      })
+    }
+    $scope.getResource = function(item){
+      console.log(item);
+      ServerControl.getResource(item.id);
+    }
+    
+    //////////////////////////////////////////////
   }).factory('ServerControl',function($sails){
     var currentServer = currentServer || {};
     return{
@@ -51,7 +70,6 @@ angular.module('KLGServerApp')
         })
       },
       getTree:function(idResource){
-        console.log("GetTree");
         if(idResource != undefined){
           var data = {
             id: idResource
@@ -62,6 +80,18 @@ angular.module('KLGServerApp')
         return $sails.post('/server/'+currentServer.id+'/tree',data).then(function(response){
           return response.data;
         })
+      },
+      getResource:function(idResource){
+        var data = {
+          resource: idResource
+        }
+        return $sails.post('/server/'+currentServer.id+'/resource',data).then(function(response){
+          console.log(response);
+          return response.data;
+        })
       }
     }
+  })
+  .controller('EditFileModalCtrl',function($scope,  $uibModalInstance){
+    
   });

@@ -103,7 +103,7 @@
               <li class="cell-icon"></li>
               <li class="cell-info">
                 <div class="mt-10 mb-20 pull-left">
-                  <a href=""><i class="fa fa-folder-open"></i>Root</a>
+                  <a href="" ng-click="goToRoot()"><i class="fa fa-folder-open"></i>Root</a>
                   <span class="fa fa-angle-right"></span>
                   <div class="breadcrumb-item" ng-repeat="item in breadcrumb">
                     <a href="" ng-click="changeFolder(item, $index)"><i class="fa fa-folder-open"></i>{{item.text}}</a>
@@ -143,12 +143,12 @@
           </ul>
         </li>
         <li class="body">
-          <ul ng-repeat="folder in folders | filter: { children: false }">
+          <ul ng-repeat="file in folders | filter: { children: false }">
             <li class="cell-icon">
               <i class="fa fa-file-text-o"></i>
             </li>
             <li class="cell-info">
-              <a href="#" class="title h4">{{folder.text}} </a>
+              <a href="" class="title h4" ng-click="getResource(file)">{{file.text}} </a>
             </li>
             <li class="cell-topic-count"><a href="" class="title"> <i class="fa fa-pencil-square-o"></i></a></li>
             <li class="cell-reply-count"><a href="" class="title"> <i class="fa fa-times"></i></a></li>
