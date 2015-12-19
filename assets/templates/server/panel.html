@@ -87,10 +87,10 @@
               <i class="fa fa-folder-open-o fa-fw"></i>
             </span>
             <div class="youplay-input klg-input-group">
-              <input type="text" placeholder="Nuevo Directorio" event-focus>
+              <input ng-model="newFolderName" type="text" placeholder="Nuevo Directorio" event-focus>
             </div>
             <span class="input-group-btn">
-              <button class="btn btn-primary" type="button"><i class="fa fa-plus fa-fw"></i></button>
+              <button class="btn btn-primary" type="button" ng-click="createFolder(newFolderName)"><i class="fa fa-plus fa-fw"></i></button>
             </span>
           </div>
         </div> 
@@ -148,7 +148,7 @@
               <i class="fa fa-file-text-o"></i>
             </li>
             <li class="cell-info">
-              <a href="" class="title h4" ng-click="getResource(file)">{{file.text}} </a>
+              <a href="" class="title h4" ng-click="openEdit(file)">{{file.text}} </a>
             </li>
             <li class="cell-topic-count"><a href="" class="title"> <i class="fa fa-pencil-square-o"></i></a></li>
             <li class="cell-reply-count"><a href="" class="title"> <i class="fa fa-times"></i></a></li>

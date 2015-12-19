@@ -1,5 +1,5 @@
 angular.module('KLGServerApp')
-  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, selectServer, ServerControl){
+  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, selectServer, ServerControl, $uibModal){
     //console.log("Iniciado");
     $scope.server = selectServer;
     $scope.breadcrumb = [];
@@ -41,14 +41,47 @@ angular.module('KLGServerApp')
       changueFolder(folder);
     }
     
+    $scope.createFolder = function(name){
+      if($scope.breadcrumb.length > 0){
+        var parentFolder = $scope.breadcrumb[$scope.breadcrumb.length - 1];
+        ServerControl.writeResource('createFolder', parentFolder.id, name).then(function(response){
+          changueFolder(parentFolder);
+        });
+      }else{
+        ServerControl.writeResource('createFolder',$scope.server.base_dir,name).then(function(response){
+          ServerControl.getTree().then(function(folders){
+          $scope.folders = folders;
+          });
+        });
+      }
+      $scope.newFolderName.clear()
+    }
+    
     function changueFolder(folder){
       ServerControl.getTree(folder.id).then(function(folders){
         $scope.folders = folders;
       })
     }
-    $scope.getResource = function(item){
-      console.log(item);
-      ServerControl.getResource(item.id);
+    $scope.openEdit = function(item){
+      if(item.editable){
+        var editFileModal = $uibModal.open({
+        animation: true,
+        templateUrl:'modals/edit-file.html',
+        controller:'EditFileModalCtrl',
+        size:'lg',
+        resolve:{
+          file : function(){
+            return item;
+            }
+          }
+        });
+        editFileModal.result.then(function(content){
+          ServerControl.writeResource('editFile',item.id,content)
+        })
+      
+      }
+      
+      
     }
     
     //////////////////////////////////////////////
@@ -89,9 +122,38 @@ angular.module('KLGServerApp')
           console.log(response);
           return response.data;
         })
+      },
+      writeResource:function(operation,idResource,content){
+        var data = {
+          operation:operation,
+          resource: idResource,
+          content: content
+        }
+        return $sails.post('/server/'+currentServer.id+'/write',data).then(function(response){
+          console.log(response);
+          return response;
+        })
       }
     }
   })
-  .controller('EditFileModalCtrl',function($scope,  $uibModalInstance){
+  .controller('EditFileModalCtrl',function($scope, $uibModalInstance, file, ServerControl){
+    $scope.dontLoader = true;
+    $scope.selectedItem = file;
+    $scope.content = '';
+    (function(){
+      $scope.content = '';
+       ServerControl.getResource(file.id).then(function(downloadFile){
+         if(downloadFile.length > 0){
+           $scope.content = downloadFile;
+         }
+       });
+    }());
     
+    $scope.ok = function () {
+    $uibModalInstance.close($scope.content);
+    };
+
+    $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+    };
   });
