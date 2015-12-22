@@ -21,7 +21,53 @@ angular.module('KLGServerApp')
     $scope.stop = function(){
       console.log("Servidor Detenido")
     }
-    // File Manager Functions 
+    // File Manager Functions
+    
+    $scope.rename = function(item){
+      var directory = item.id.replace(item.text,'');
+      console.log(directory);
+      var renameFileModal = $uibModal.open({
+        animation:true,
+        templateUrl:'modals/rename.html',
+        controller: 'RenameFileModal',
+        size:'',
+        resolve:{
+          file : function(){
+            return item;
+          }
+        }
+      })
+      
+      renameFileModal.result.then(function(renamedFile){
+        ServerControl.writeResource('rename',renamedFile.id,directory+renamedFile.text)
+      })
+    } 
+    
+    $scope.delete = function(item){
+      
+      var confirmModal = $uibModal.open({
+        animation:true,
+        templateUrl:'modals/message.html',
+        controller:'ConfirmModal',
+        resolve:{
+          message : function(){
+            var msg = {
+              header:' ' + (item.children) ? 'Esta seguro que desea eliminar la carpeta.' : 'Esta seguro que desea eliminar el archivo.' +'',
+              data:'Despues de realizar esta accion no podra recuperar sus archivos. \n ¿Desea continuar?.'
+            }
+            return msg;
+          }
+        }
+      });
+      
+      confirmModal.result.then(function(){
+        //Folder Option
+        if(item.children){
+          ServerControl.writeResource('deleteFolder', item.id,'');
+        }
+      });
+      
+    }
     $scope.goToRoot = function(){
       $scope.breadcrumb = [];
       ServerControl.getTree().then(function(folders){
@@ -151,6 +197,26 @@ angular.module('KLGServerApp')
     
     $scope.ok = function () {
     $uibModalInstance.close($scope.content);
+    };
+
+    $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+    };
+  })
+  .controller('RenameFileModal',function($scope, $uibModalInstance, file){
+    $scope.selectedItem = file;
+    $scope.ok = function () {
+    $uibModalInstance.close($scope.selectedItem);
+    };
+
+    $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+    };
+  })
+  .controller('ConfirmModal',function($scope, $uibModalInstance, message){
+    $scope.message = message;
+    $scope.ok = function () {
+    $uibModalInstance.close();
     };
 
     $scope.cancel = function () {

@@ -1,0 +1,10 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{message.header}}</h3>
+</div>
+<div class="modal-body">
+	<p>{{message.data}}</p>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger" type="button" ng-click="ok($event); $event.stopPropagation();"> Guardar </button>
+  <button class="btn" type="button" ng-click="cancel()"> Cancelar </button>
+</div>

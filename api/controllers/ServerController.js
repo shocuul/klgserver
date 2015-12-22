@@ -67,6 +67,17 @@ module.exports = {
 				fs.mkdirSync(req.param('resource') +'/'+ req.param('content'));
 				res.json({msg:'Carpeta creada correctamente.'});
 				break;
+			case 'rename':
+				// Angular make change file name to server only change.
+				fs.rename(req.param('resource'),req.param('content'),function(err){
+					if(err) { res.negotiate(err) } else { res.ok() }
+				})
+				break;
+			case 'deleteFolder':
+				deleteFolderRecursive(req.param('resource')).then(function(){
+					res.ok();
+				});
+				break;
 		}
 		
 		
