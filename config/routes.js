@@ -40,6 +40,7 @@ module.exports.routes = {
   'POST /server/:idServer/tree':'ServerController.getTree',
   'POST /server/:idServer/resource':'ServerController.getResource',
   'POST /server/:idServer/write':'ServerController.writeResource',
+  'POST /server/upload':'ServerController.upload',
   'GET /user/:idUser/servers':'UserController.getServers',
   'POST /user/:idUser/servers':'UserController.createServer'
 

@@ -1,4 +1,4 @@
-angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap'])
+angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload'])
   .run(function($rootScope,$state,Auth,CurrentUser, ServerService){
     console.log("¿Bienvenido a KLS que haces por aqui?");
   $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){

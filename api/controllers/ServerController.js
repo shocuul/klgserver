@@ -97,6 +97,20 @@ module.exports = {
 		sails.log(files);
 		mkdir('-p', 'usuarios/tes2');
 		return res.json({success:'Server Created'});
+	},
+	upload:function(req,res){
+		req.file('file').upload({
+			dirname:req.params('dir')
+		},function(err,uploadedFile){
+			if (err) {
+      		return res.negotiate(err);
+   			}
+    		// If no files were uploaded, respond with an error.
+    		if (uploadedFiles.length === 0){
+      			return res.badRequest('No file was uploaded');
+    		}
+			res.ok();
+		});
 	}
 };
 

@@ -74,10 +74,13 @@
               <i class="fa fa-files-o fa-fw"></i>
             </span>
             <div class="youplay-input klg-input-group">
-              <input type="text" placeholder="Drag files here" readonly="" event-focus>
+              <div ngf-drop="uploadFiles($files)" class="drop-box"
+                    ngf-drag-over-class="'dragover'" ngf-multiple="true" 
+                    ngf-pattern="'image/*,application/pdf'">Drop Images or PDFs files here</div>
+              <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
             </div>
             <span class="input-group-btn">
-              <button class="btn btn-primaty" type="button"><i class="fa fa-upload fa-fw"></i></button>
+              <button class="btn btn-primaty" type="button" ngf-select="uploadFiles($files)" multiple="multiple"><i class="fa fa-upload fa-fw"></i></button>
             </span>
           </div>
         </div>

@@ -1,5 +1,5 @@
 angular.module('KLGServerApp')
-  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, selectServer, ServerControl, $uibModal){
+  .controller('ServerPanelCtrl',function($scope,$sails,$http,CurrentUser, selectServer, ServerControl, $uibModal, Upload){
     //console.log("Iniciado");
     $scope.server = selectServer;
     $scope.breadcrumb = [];
@@ -22,6 +22,18 @@ angular.module('KLGServerApp')
       console.log("Servidor Detenido")
     }
     // File Manager Functions
+    
+    $scope.uploadFiles = function(files){
+      if(files && files.length){
+        for (var i = 0; i < files.length; i++) {
+          Upload.upload({
+            url:'server/upload',
+            data:{file:files[i],}
+          })
+          
+        }
+      }
+    }
     
     $scope.rename = function(item){
       var directory = item.id.replace(item.text,'');
