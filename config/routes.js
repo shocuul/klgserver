@@ -35,6 +35,12 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
+  '/admin':{
+    view:'admin-homepage',
+    locals:{
+      layout:'admin-layout'
+    }
+  },
   'POST /server/:idServer/start':'ServerController.start',
   'POST /server/:idServer/stop':'ServerController.stop',
   'POST /server/:idServer/tree':'ServerController.getTree',

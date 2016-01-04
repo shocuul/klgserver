@@ -20,6 +20,14 @@ module.exports = function(grunt) {
 		css: {
 			src: require('../pipeline').cssFilesToInject,
 			dest: '.tmp/public/concat/production.css'
+		},
+		jsAdmin:{
+			src: require('../pipeline').adminJsFilesToInject,
+			dest:'.tmp/public/concat/productionAdmin.js'
+		},
+		cssAdmin:{
+			src:require('../pipeline').admimCssFilesToInject,
+			dest:'.tmp/public/concat/productionAdmin.css'
 		}
 	});
 

@@ -22,6 +22,10 @@ var cssFilesToInject = [
   'styles/youplay.min.css',
   'styles/**/*.css'
 ];
+// CSS Admin to Inject in order
+var admimCssFilesToInject = [
+  'admin/styles/**/*.css'
+];
 
 
 // Client-side javascript files to inject in order
@@ -52,6 +56,17 @@ var jsFilesToInject = [
   'js/**/*.js'
 ];
 
+// Admin Javascript files to Load
+var adminJsFilesToInject = [
+  'js/dependencies/sails.io.js',
+  'js/dependencies/angular.min.js',
+  'js/dependencies/angular-sails.min.js',
+  'js/dependencies/angular-ui-router.js',
+  'js/dependencies/angular-animate.min.js',
+  'js/dependencies/angular-aria.min.js',
+  'admin/js/dependencies/**/*.js',
+  'admin/js/**/*.js'
+]
 
 // Client-side HTML templates are injected using the sources below
 // The ordering of these templates shouldn't matter.
@@ -79,4 +94,12 @@ module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
 });
 module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
   return 'assets/' + path;
+});
+// Admin Files 
+module.exports.admimCssFilesToInject = admimCssFilesToInject.map(function(path){
+  return '.tmp/public/' + path;
+});
+
+module.exports.adminJsFilesToInject = adminJsFilesToInject.map(function(path){
+  return '.tmp/public/' + path;
 });

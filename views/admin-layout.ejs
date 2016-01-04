@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Kaos Latin Servers Administration</title>
+		<meta name="description" content="Administracion KLS">
+		<!-- Viewport mobile tag for sensible mobile support -->
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    	<!--
+        	Stylesheets and Preprocessors
+       		==============================
+
+        	You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        	using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        	of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        	By default, stylesheets from your `assets/styles` folder are included
+        	here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        	are supported. In production, your styles will be minified and concatenated into
+        	a single file.
+
+        	To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        	For example, here are a few things you could do:
+
+            	+ Change the order of your CSS files
+            	+ Import stylesheets from other directories
+            	+ Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    		-->
+    	<!-- Icon -->
+    	<link rel="icon" type="image/png" href="/images/icon.png">
+
+    	<!-- Google Fonts -->
+    	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+		<!--STYLES_ADMIN-->
+		<link rel="stylesheet" href="/min/productionAdmin.min.css">
+		<!--STYLES_ADMIN END-->
+	</head>
+	<body>
+		<%- body %>
+		<!--SCRIPTS_ADMIN-->
+		<script src="/min/productionAdmin.min.js"></script>
+		<!--SCRIPTS_ADMIN END-->
+		<!--TEMPLATES-->
+		<script type="text/javascript" src="/templates.js"></script>
+		<!--TEMPLATES END-->
+	</body>
+</html>

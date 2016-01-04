@@ -274,6 +274,58 @@ module.exports = function(grunt) {
 				'views/**/*.html':['.tmp/public/templates.js'],
 				'views/**/*.ejs':['.tmp/public/templates.js']
 			}
+		},
+		devCssAdmin:{
+			options:{
+				startTag:'<!--STYLES_ADMIN-->',
+				endTag:'<!--STYLES_ADMIN END-->',
+				fileTmpl:'<link rel="stylesheet" href="%s">',
+				appRoot:'.tmp/public'
+			},
+			files:{
+				'.tmp/public/**/*.html':require('../pipeline').admimCssFilesToInject,
+				'views/**/*.html':require('../pipeline').admimCssFilesToInject,
+				'views/**/*.ejs':require('../pipeline').admimCssFilesToInject
+			}
+		},
+		devJsAdmin:{
+			options:{
+				startTag:'<!--SCRIPTS_ADMIN-->',
+				endTag:'<!--SCRIPTS_ADMIN END-->',
+				fileTmpl:'<script src="%s"></script>',
+				appRoot:'.tmp/public'
+			},
+			files:{
+				'.tmp/public/**/*.html':require('../pipeline').adminJsFilesToInject,
+				'views/**/*.html':require('../pipeline').adminJsFilesToInject,
+				'views/**/*.ejs':require('../pipeline').adminJsFilesToInject
+			}
+		},
+		prodCssAdmin:{
+			options:{
+				startTag:'<!--STYLES_ADMIN-->',
+				endTag:'<!--STYLES_ADMIN END-->',
+				fileTmpl:'<link rel="stylesheet" href="%s">',
+				appRoot:'.tmp/public'
+			},
+			files:{
+				'.tmp/public/index.html': ['.tmp/public/min/productionAdmin.min.css'],
+				'views/**/*.html': ['.tmp/public/min/productionAdmin.min.css'],
+				'views/**/*.ejs': ['.tmp/public/min/productionAdmin.min.css']
+			}
+		},
+		prodJSAdmin:{
+			options:{
+				startTag:'<!--SCRIPTS_ADMIN-->',
+				endTag:'<!--SCRIPTS_ADMIN END-->',
+				fileTmpl:'<script src="%s"></script>',
+				appRoot:'.tmp/public'
+			},
+			files:{
+				'.tmp/public/**/*.html':['.tmp/public/min/productionAdmin.min.js'],
+				'views/**/*.html':['.tmp/public/min/productionAdmin.min.js'],
+				'views/**/*.ejs':['.tmp/public/min/productionAdmin.min.js']
+			}
 		}
 	});
 

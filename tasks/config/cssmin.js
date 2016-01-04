@@ -14,6 +14,10 @@ module.exports = function(grunt) {
 		dist: {
 			src: ['.tmp/public/concat/production.css'],
 			dest: '.tmp/public/min/production.min.css'
+		},
+		distAdmin:{
+			src:['.tmp/public/concat/productionAdmin.css'],
+			dest:'.tmp/public/min/productionAdmin.min.css'
 		}
 	});
 
