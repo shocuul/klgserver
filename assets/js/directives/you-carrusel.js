@@ -88,14 +88,14 @@ angular.module('KLGServerApp')
         //             items:4
         //         }
         //     }
-        // })
-
+        // }
 
       }
     }
   })
   .directive('onLastRepeat', function() {
         return function(scope, element, attrs) {
+          
             if (scope.$last) setTimeout(function(){
               console.log("Ultimo repeat")
               element.parent().owlCarousel({
@@ -124,5 +124,6 @@ angular.module('KLGServerApp')
                   }
               })
             }, 1);
+            
         };
     });

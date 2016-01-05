@@ -1,5 +1,5 @@
 angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload'])
-  .run(function($rootScope,$state,Auth,CurrentUser, ServerService){
+  .run(function($rootScope,$state,Auth,CurrentUser, ServerService, youplay){
     console.log("¿Bienvenido a KLS que haces por aqui?");
   $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
     if(toState.name=="server.dashboard"){
@@ -15,6 +15,13 @@ angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages
       $state.go('anon.login');
     }
     $rootScope.currentUser = CurrentUser.user();
+  });
+  
+  $rootScope.$on('$viewContentLoaded',function(event){
+    console.log("Hola ");
+    youplay.init({
+              smoothscroll: false
+    });
   });
 
 });
