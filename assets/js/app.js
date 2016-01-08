@@ -1,3 +1,5 @@
+(function(angular){
+  'use strict';
 angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload'])
   .run(function($rootScope,$state,Auth,CurrentUser, ServerService, youplay){
     console.log("¿Bienvenido a KLS que haces por aqui?");
@@ -30,7 +32,7 @@ angular.module('KLGServerApp')
   .config(['$sailsProvider', function($sailsProvider){
     $sailsProvider.url = '/';
   }]);
-
+})(angular);
 // var app = angular.module('KLGServerApp', ['ngMaterial', 'ngSails']);
 //
 // app.controller('AppCtrl', ['$scope', '$sails', '$http', '$filter', '$interval', '$mdSidenav', '$mdDialog', function ($scope, $sails, $http, $filter, $interval, $mdSidenav, $mdDialog) {
