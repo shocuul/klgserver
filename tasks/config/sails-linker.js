@@ -275,6 +275,19 @@ module.exports = function(grunt) {
 				'views/**/*.ejs':['.tmp/public/templates.js']
 			}
 		},
+		devTplAdmin:{
+			options:{
+				startTag:'<!--TEMPLATES_ADMIN-->',
+				endTag:'<!--TEMPLATES_ADMIN END-->',
+				fileTmpl:'<script type="text/javascript" src="%s"></script>',
+				appRoot:'.tmp/public'
+			},
+			files:{
+				'.tmp/public/index.html':['.tmp/public/adminTemplates.js'],
+				'views/**/*.html':['.tmp/public/adminTemplates.js'],
+				'views/**/*.ejs':['.tmp/public/adminTemplates.js']
+			}
+		},	
 		devCssAdmin:{
 			options:{
 				startTag:'<!--STYLES_ADMIN-->',

@@ -9,6 +9,15 @@ module.exports = function(grunt) {
       files:{
         '.tmp/public/templates.js':require('../pipeline').templateFilesToInject
       }
+    },
+    admin:{
+      options:{
+        base:'assets/admin/js',
+        module:'admin-templates',
+      },
+      files:{
+        '.tmp/public/adminTemplates.js':require('../pipeline').templateFilesAdminToInject
+      }
     }
   });
 

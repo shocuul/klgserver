@@ -64,7 +64,10 @@ var adminJsFilesToInject = [
   'js/dependencies/angular-ui-router.js',
   'js/dependencies/angular-animate.min.js',
   'js/dependencies/angular-aria.min.js',
+  'admin/js/dependencies/angular-material.min.js',
   'admin/js/dependencies/**/*.js',
+  'admin/js/dependencies/**/*.js',
+  'admin/js/app.js',
   'admin/js/**/*.js'
 ]
 
@@ -82,6 +85,10 @@ var templateFilesToInject = [
   'js/**/*.html'
 ];
 
+var templateFilesAdminToInject = [
+  'admin/js/**/*.html'
+]
+
 
 
 // Prefix relative paths to source files so they point to the proper locations
@@ -96,7 +103,7 @@ module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
 module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
   return 'assets/' + path;
 });
-// Admin Files 
+// Admin Files
 module.exports.admimCssFilesToInject = admimCssFilesToInject.map(function(path){
   return '.tmp/public/' + path;
 });
@@ -104,3 +111,7 @@ module.exports.admimCssFilesToInject = admimCssFilesToInject.map(function(path){
 module.exports.adminJsFilesToInject = adminJsFilesToInject.map(function(path){
   return '.tmp/public/' + path;
 });
+
+module.exports.templateFilesAdminToInject = templateFilesAdminToInject.map(function(path){
+  return '.tmp/public/' + path;
+})

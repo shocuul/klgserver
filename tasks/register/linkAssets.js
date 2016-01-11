@@ -8,5 +8,6 @@ module.exports = function (grunt) {
 		'sails-linker:devTplJade',
 		'sails-linker:devCssAdmin',
 		'sails-linker:devJsAdmin',
+		'sails-linker:devTplAdmin',
 	]);
 };

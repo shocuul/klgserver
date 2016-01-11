@@ -12,5 +12,6 @@ module.exports = function (grunt) {
 		'sails-linker:devTplJade',
 		'sails-linker:prodCssAdmin',
 		'sails-linker:prodJSAdmin',
+		'sails-linker:devTplAdmin',
 	]);
 };
