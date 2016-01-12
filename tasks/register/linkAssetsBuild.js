@@ -3,9 +3,10 @@ module.exports = function (grunt) {
 		'sails-linker:devJsRelative',
 		'sails-linker:devStylesRelative',
 		'sails-linker:devTpl',
+		'sails-linker:devTplAdmin',
 		'sails-linker:devJsRelativeJade',
 		'sails-linker:devStylesRelativeJade',
 		'sails-linker:devTplJade',
-		'sails-linker:devTplAdmin'
+		
 	]);
 };

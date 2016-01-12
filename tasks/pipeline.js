@@ -113,5 +113,5 @@ module.exports.adminJsFilesToInject = adminJsFilesToInject.map(function(path){
 });
 
 module.exports.templateFilesAdminToInject = templateFilesAdminToInject.map(function(path){
-  return '.tmp/public/' + path;
+  return 'assets/' + path;
 })

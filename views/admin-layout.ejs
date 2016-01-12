@@ -28,7 +28,8 @@
             	+ Use a different or additional preprocessor, like SASS, SCSS or Stylus
     		-->
     	<!-- Icon -->
-    	<link rel="icon" type="image/png" href="/images/icon.png">
+    		<link rel="icon" type="image/png" href="/images/icon.png">
+	
 
     	<!-- Google Fonts -->
     	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
@@ -37,7 +38,34 @@
 		<link rel="stylesheet" href="/admin/styles/styles.css">
 		<!--STYLES_ADMIN END-->
 	</head>
-	<body>
+	<body layout="row" ng-controller="NavCtrl">
+		<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+		<md-toolbar layout="row" layout-align="center center">
+			<a href="#"> <img class="logo" src="/images/logo.png" alt="" /></a>
+		</md-toolbar>
+		<div layout="column" class="md-toolbar-tools-bottom inset">
+			<img src="http://www.gravatar.com/205e460b479e2e5b48aec07710c08d50">
+			<span></span>
+			<div>Nombre</div>
+			<div>Email</div>
+		</div>
+		<md-list>
+			<md-item ng-repeat="menu in menuItems">
+				<a>
+					<md-item-content md-ink-ripple layout="row" layout-align="start center">
+						<div class="inset">
+							<ng-md-icon icon="{{menu.icon}}" style="fill:gray;"></ng-md-icon>
+						</div>
+						<div class="inset">
+							{{menu.name}}
+						</div>
+					</md-item-content>
+				</a>
+			</md-item>
+		</md-list>
+		<!--<md-divider></md-divider>
+      	<md-subheader>Management</md-subheader>-->
+		</md-sidenav>
 		<%- body %>
 		<!--SCRIPTS_ADMIN-->
 		<script src="/js/dependencies/sails.io.js"></script>
@@ -49,7 +77,10 @@
 		<script src="/admin/js/dependencies/angular-material.min.js"></script>
 		<script src="/admin/js/app.js"></script>
 		<script src="/admin/js/Navigation/NavigationController.js"></script>
+		<script src="/admin/js/Navigation/NavigationService.js"></script>
+		<script src="/admin/js/routes.js"></script>
 		<!--SCRIPTS_ADMIN END-->
+				<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
 		<!--TEMPLATES_ADMIN-->
 		<script type="text/javascript" src="/adminTemplates.js"></script>
 		<!--TEMPLATES_ADMIN END-->
