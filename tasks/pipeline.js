@@ -24,7 +24,11 @@ var cssFilesToInject = [
 ];
 // CSS Admin to Inject in order
 var admimCssFilesToInject = [
-  'admin/styles/**/*.css'
+    'styles/bootstrap.min.css',
+    'admin/styles/metisMenu.min.css',
+    'admin/styles/sb-admin-2.css',
+    'styles/font-awesome.min.css',
+    'admin/styles/**/*.css'
 ];
 
 
@@ -59,12 +63,17 @@ var jsFilesToInject = [
 // Admin Javascript files to Load
 var adminJsFilesToInject = [
   'js/dependencies/sails.io.js',
+  'js/dependencies/jquery.min.js',
+  'js/dependencies/bootstrap.min.js',
   'js/dependencies/angular.min.js',
   'js/dependencies/angular-sails.min.js',
   'js/dependencies/angular-ui-router.js',
   'js/dependencies/angular-animate.min.js',
   'js/dependencies/angular-aria.min.js',
-  'admin/js/dependencies/angular-material.min.js',
+  'js/dependencies/angular-messages.js',
+  'js/dependencies/ui-bootstrap.min.js',
+  'admin/js/dependencies/metisMenu.min.js',
+  'admin/js/dependencies/sb-admin-2.js',
   'admin/js/dependencies/**/*.js',
   'admin/js/dependencies/**/*.js',
   'admin/js/app.js',

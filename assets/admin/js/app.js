@@ -1,6 +1,6 @@
 (function(angular){
 	"use strict";
 	
-	angular.module('KLSAdmin',['ngSails','ngMaterial','ui.router','admin-templates','ngMdIcons'])
+	angular.module('KLSAdmin',['ngSails','ui.router','admin-templates','ngMessages','ui.bootstrap'])
 	
 })(angular);
