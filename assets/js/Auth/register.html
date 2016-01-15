@@ -8,13 +8,13 @@
         <div class="container align-center">
           <div class="youplay-form">
             <h2 style="padding-bottom:1em;">Registro</h2>
-            <div ng-repeat="error in errors">
+            <div ng-repeat="error in vm.errors">
               <span class="label label-warning">{{error.err}}</span>
             </div>
-            <form ng-submit="register()" name="registerForm" novalidate>
+            <form ng-submit="vm.register()" name="registerForm" novalidate>
               <!-- Nombre -->
               <div class="youplay-input">
-                <input name="name" type="text" ng-model="user.name" required placeholder="Nombre" event-focus>
+                <input name="name" type="text" ng-model="vm.user.name" required placeholder="Nombre" event-focus>
                 <div ng-messages="registerForm.name.$error" ng-show="registerForm.name.$dirty">
                   <p ng-message="required" class="alert alert-warning">
                     Nombre requerido.
@@ -23,7 +23,7 @@
               </div>
               <!-- Correo Electronico -->
               <div class="youplay-input">
-                <input type="email" name="email" ng-model="user.email" required placeholder="Correo Electronico" event-focus>
+                <input type="email" name="email" ng-model="vm.user.email" required placeholder="Correo Electronico" event-focus>
                 <div ng-messages="registerForm.email.$error" ng-show="registerForm.email.$dirty">
                   <p ng-message="required" class="alert alert-warning">
                     Correo Electronico requerido.
@@ -35,7 +35,7 @@
               </div>
               <!-- Contraseña -->
               <div class="youplay-input">
-                <input type="password" name="password" ng-model="user.password" required placeholder="Contraseña" event-focus>
+                <input type="password" name="password" ng-model="vm.user.password" required placeholder="Contraseña" event-focus>
                 <div ng-messages="registerForm.password.$error" ng-show="registerForm.password.$dirty">
                   <p ng-message="required" class="alert alert-danger">
                     Contraseña Requerida
@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="youplay-input">
-                <input type="password" name="confirmPassword" ng-model="user.confirmPassword" required placeholder="Confirma la contraseña" event-focus>
+                <input type="password" name="confirmPassword" ng-model="vm.user.confirmPassword" required placeholder="Confirma la contraseña" event-focus>
                 <div ng-messages="registerForm.confirmPassword.$error" ng-show="registerForm.confirmPassword.$dirty">
                   <p ng-message="required" class="alert alert-danger">
                     Repite la contraseña

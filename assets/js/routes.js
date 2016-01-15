@@ -1,12 +1,17 @@
-angular.module('KLGServerApp')
-  .config(function($stateProvider,$urlRouterProvider,AccessLevels){
-  $stateProvider
-    .state('anon',{
-      abstract: true,
-      template:'<ui-view/>',
-      data:{
-        access: AccessLevels.anon
-      }
+(function(angular){
+  "use strict";
+  
+  angular.module('KLSServerApp')
+    .config(['$stateProvider','$urlRouterProvider','AccessLevels',configureStates]);
+    
+  function configureStates($stateProvider,$urlRouterProvider,AccessLevels){
+    $stateProvider
+      .state('anon',{
+        abstract: true,
+        template:'<ui-view/>',
+        data:{
+          access: AccessLevels.anon
+        }
     })
     .state('anon.home',{
       url:'/',
@@ -16,12 +21,14 @@ angular.module('KLGServerApp')
     .state('anon.login',{
       url:'/login',
       templateUrl:'auth/login.html',
-      controller: 'LoginCtrl'
+      controller: 'LoginCtrl',
+      controllerAs:'vm'
     })
     .state('anon.register',{
       url:'/register',
       templateUrl:'auth/register.html',
-      controller:'RegisterCtrl'
+      controller:'RegisterCtrl',
+      controllerAs:'vm'
     });
 
     $stateProvider
@@ -63,4 +70,7 @@ angular.module('KLGServerApp')
       });
 
     $urlRouterProvider.otherwise('/');
-});
+}
+  
+  
+})(angular);

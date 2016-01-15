@@ -6,13 +6,13 @@
         <div class="container align-center">
           <div class="youplay-form">
             <h2 style="padding-bottom:1em;">Iniciar sesion</h2>
-            <div ng-repeat="error in errors">
+            <div data-ng-repeat="error in vm.errors">
               <span class="label label-warning">{{error.err}}</span>
             </div>
-            <form ng-submit="login()" name="loginForm" novalidate>
+            <form ng-submit="vm.login()" name="loginForm" novalidate>
               <!-- Cooreo Electronico -->
               <div class="youplay-input">
-                <input type="email" name="email" ng-model="user.email" required placeholder="Correo Electronico" event-focus>
+                <input type="email" name="email" data-ng-model="vm.user.email" required placeholder="Correo Electronico" event-focus>
                 <div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$dirty">
                   <p ng-message="required" class="alert alert-warning">
                     Correo Electronico requerido.
@@ -25,7 +25,7 @@
 
               <!-- Contraseña -->
               <div class="youplay-input">
-                <input type="password" name="password" ng-model="user.password" required placeholder="Contraseña" event-focus>
+                <input type="password" name="password" data-ng-model="vm.user.password" required placeholder="Contraseña" event-focus>
                 <div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$dirty">
                   <p ng-message="required" class="alert alert-warning">
                     Contraseña requerida.

@@ -1,7 +1,7 @@
 (function(angular){
 	"use strict";
 	angular.module('KLSAdmin')
-	.service('NavService',function(){
+	.service('SessionService',function(){
 		var menuItems = [
 			{
 				icon:'gamepad',
@@ -17,5 +17,5 @@
 				return menuItems;
 			}
 		}
-	});
+	})
 })(angular);

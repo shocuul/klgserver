@@ -1,35 +1,34 @@
 (function(angular){
-  'use strict';
-angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload'])
-  .run(function($rootScope,$state,Auth,CurrentUser, ServerService, youplay){
-    console.log("¿Bienvenido a KLS que haces por aqui?");
-  $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-    if(toState.name=="server.dashboard"){
-      var serverExist = ServerService.checkifExist(toParams.idServer);
-      console.log(serverExist)
-      if(serverExist == null || serverExist == undefined){
-        event.preventDefault();
-        $state.go('user.dashboard');
-      }
-    }
-    if(!Auth.authorize(toState.data.access)){
-      event.preventDefault();
-      $state.go('anon.login');
-    }
-    $rootScope.currentUser = CurrentUser.user();
-  });
   
-  $rootScope.$on('$viewContentLoaded',function(event){
-    console.log("Hola ");
-    youplay.init({
-              smoothscroll: false
+  var app = angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload']);
+
+  app.run(['$rootScope','$state','Auth','CurrentUser','ServerService','youplay',function($rootScope,$state,Auth,CurrentUser, ServerService, youplay){
+    console.log("¿Bienvenido a KLS que haces por aqui?");
+    $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+      if(toState.name=="server.dashboard"){
+        var serverExist = ServerService.checkifExist(toParams.idServer);
+        if(serverExist == null || serverExist == undefined){
+          event.preventDefault();
+          $state.go('user.dashboard');
+        }
+      }
+      if(!Auth.authorize(toState.data.access)){
+        event.preventDefault();
+        $state.go('anon.login');
+      }
+      $rootScope.currentUser = CurrentUser.user();
     });
-  });
+  
+    $rootScope.$on('$viewContentLoaded',function(event){
+      youplay.init({
+              smoothscroll: false
+      });
+    });
 
-});
+})];
 
-angular.module('KLGServerApp')
-  .config(['$sailsProvider', function($sailsProvider){
+
+  app.config(['$sailsProvider', function($sailsProvider){
     $sailsProvider.url = '/';
   }]);
 })(angular);

@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.config.set('html2js',{
     dev:{
       options:{
-        base: 'assets/templates',
+        base: 'assets/js',
         module:'app-templates',
       },
       files:{
