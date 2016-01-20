@@ -1,8 +1,7 @@
 (function(angular){
   "use strict";
-  angular.module('kls.controllers',[]).controller('RegisterCtrl',['$state','Auth',controller]);
   
-  function controller($state,Auth){
+  function RegisterCtrl($state,Auth){
     var vm = this;
     vm.errors = [];
     vm.register = register;
@@ -15,4 +14,6 @@
       }
     }
   }
+  
+  angular.module('KaosLatinServer').controller('RegisterCtrl',RegisterCtrl);
 })(angular);

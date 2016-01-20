@@ -1,9 +1,7 @@
 (function(angular){
 	"use strict";
 	
-	angular.module('kls.services').factory('ServerControl',['$sails',factory]);
-	
-	function factory($sails){
+	function ServerControl($sails){
 		var currentServer = currentServer || {};
 		var service = {
 			getServerInfo:getServerInfo,
@@ -63,9 +61,8 @@
           		return response;
         	})
 		}
-		
-		
-		
-		
 	}
+    
+     angular.module('KaosLatinServer')
+     .factory('ServerControl',ServerControl);
 })(angular);

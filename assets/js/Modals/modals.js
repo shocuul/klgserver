@@ -1,15 +1,12 @@
 (function(angular){
 	"use strict";
 	
-	var app = angular.module('kls.controllers',[]);
-	app.controller('EditFileModalCtrl',['$uibModalInstance','file','ServerControl',editController]);
-	
-	app.controller('RenameFileModal',['$uibModalInstance','file',renameController]);
-	
-	app.controller('ConfirmModal',['$uibModalInstance','message', confirmController]);
 	
 	
-	function editController($uibModalInstance, file, ServerControl){
+	/**
+     * @name EditFileModalCtrl
+     */
+	function EditFileModalCtrl($uibModalInstance, file, ServerControl){
 		var vm = this;
 		vm.dontLoader = true;
 		vm.selectedItem = file;
@@ -40,7 +37,10 @@
 		}	
 	}
 	
-	function renameController($uibModalInstance, file){
+    /**
+     * @name RenameFileModal
+     */
+	function RenameFileModal($uibModalInstance, file){
 		var vm = this;
 		vm.selectedItem = file;
 		vm.ok = ok;
@@ -57,7 +57,10 @@
 		}
 	}
 	
-	function confirmController($uibModalInstance, message){
+    /**
+     * @name ConfirmModal
+     */
+	function ConfirmModal($uibModalInstance, message){
 		var vm = this;
 		vm.message = message;
 		vm.ok = ok;
@@ -72,6 +75,11 @@
 		}
 	}
 	
+    
+    angular.module('KaosLatinServer')
+    .controller('EditFileModalCtrl',EditFileModalCtrl)
+    .controller('RenameFileModal',RenameFileModal)
+    .controller('ConfirmModal',ConfirmModal);
 	
 	
 })(angular);

@@ -1,7 +1,11 @@
 (function(angular){
   "use strict";
-  angular.module('kls.controllers',[]).controller('NavCtrl',['Auth','CurrentUser','$state','$rootScope', controller]);
-  function controller(Auth, CurrentUser, $state, $rootScope){
+  /**
+   * @name NavCtrl
+   * @desc Navigation
+   * @ngInject
+   */
+  function NavCtrl(Auth, CurrentUser, $state, $rootScope){
     var vm = this;
     vm.auth = Auth;
     vm.logout = logout;
@@ -12,4 +16,6 @@
     }
     
   }
+  
+  angular.module('KaosLatinServer').controller('NavCtrl', NavCtrl);
 })(angular);

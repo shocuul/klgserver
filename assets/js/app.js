@@ -1,10 +1,13 @@
-(function(angular){
-  
-  var app = angular.module('KaosLatinServer',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload','kls.controllers','kls.directives','kls.services']);
- 
-  app.run(['$rootScope','$state','Auth','CurrentUser','ServerService','youplay',runFunctions]);
-  
-  function runFunctions($rootScope,$state,Auth,CurrentUser,ServerService,youplay){
+(function(){
+    "use strict";
+    /**
+    * @ngInject
+    */
+    function configSailsProvider($sailsProvider){
+        $sailsProvider.url = '/';
+    }
+    
+    function runFunctions($rootScope,$state,Auth,CurrentUser,ServerService,youplay){
     console.log("¿Bienvenido a KLS que haces por aqui?");
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
       if(toState.name=="server.dashboard"){
@@ -28,12 +31,11 @@
     });
 
   }
-
-
-  app.config(function($sailsProvider){
-    $sailsProvider.url = '/';
-  });
-})(angular);
+  
+  angular.module('KaosLatinServer',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload'])
+  .run(runFunctions)
+  .config(configSailsProvider);
+})();
 // var app = angular.module('KLGServerApp', ['ngMaterial', 'ngSails']);
 //
 // app.controller('AppCtrl', ['$scope', '$sails', '$http', '$filter', '$interval', '$mdSidenav', '$mdDialog', function ($scope, $sails, $http, $filter, $interval, $mdSidenav, $mdDialog) {

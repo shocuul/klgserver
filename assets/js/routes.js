@@ -40,13 +40,9 @@
       .state('user.dashboard',{
         url:'/dashboard',
         templateUrl:'User/dashboard.html',
-        controller:'DashboardCtrl',
         controllerAs:'vm',
-        resolve:{
-        servers:function(ServerService){
-             return ServerService.getAll();
-           }
-        }
+        controller:'DashboardCtrl',
+        resolve:DashboardCtrl.resolve
       });
 
     $stateProvider

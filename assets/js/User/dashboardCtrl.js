@@ -1,18 +1,11 @@
 (function(angular){
   "use strict";
-  
-  var app = angular.module('kls.controllers',[]);
-  app.controller('DashboardCtrl',['$uibModal','ServerService','servers',controller]);
-  
-  app.controller('CreateServerModalCtrl',['$uibModalInstance','$rootScope','ServerService',modalController]);
-  
-  app.filter('progress',['$sce',function($sce){
-    return function(status){
-      return !status ? $sce.trustAsHtml('<span class="label label-info">Instalando</span>') : $sce.trustAsHtml('<span class="label label-success">Completo</span>');
-    }
-  }]);
-  
-  function controller($uibModal, ServerService, servers){
+  /**
+   * @name DasboardController
+   * @desc Present the server of active user
+   * @ngInject
+   */
+  function DashboardCtrl($uibModal, ServerService, servers){
     var vm = this;
     vm.servers = servers;
     vm.delete = function(server){
@@ -29,10 +22,18 @@
     }
   }
   
+  DashboardCtrl.resolve = {
+      servers:function(ServerService){
+          return ServerService.getAll();
+      }
+  }
   
-  
-  
-  function modalController($uibModalInstance,$rootScope, ServerService){
+  /**
+   * @name CreateServerModalCtrl
+   * @desc Create new server for the user
+   * @ngInject
+   */
+  function CreateServerModalCtrl($uibModalInstance, ServerService){
     var vm = this;
     vm.alerts = [];
     vm.closeAlert = closeAlert;
@@ -72,13 +73,12 @@
     }
     
     function ok(){
-      if($scope.server.game == undefined){
-        $scope.alerts.push({msg:'No a introducido un juego'});
-      }else if($scope.server.num_player == undefined){
-        $scope.alerts.push({msg:'No a introducido el numero de jugadores'});
+      if(vm.server.game == undefined){
+        vm.alerts.push({msg:'No a introducido un juego'});
+      }else if(vm.server.num_player == undefined){
+        vm.alerts.push({msg:'No a introducido el numero de jugadores'});
       }else{
-        //console.log($scope.server);
-        ServerService.create($scope.server);
+        ServerService.create(vm.server);
         $uibModalInstance.close();
       }
     }
@@ -86,7 +86,22 @@
     function cancel(){
       $uibModalInstance.dismiss('cancel');
     }
-    
-    
   }
+  /**
+   * @name Progress Filter
+   * @desc Show a label to server state
+   * @ngInject
+   */
+  function progress($sce){
+      return function(status){
+          return !status ? $sce.trustAsHtml('<span class="label label-info">Instalando</span>') : $sce.trustAsHtml('<span class="label label-success">Completo</span>');
+      }
+  }
+  
+  angular
+    .module('KaosLatinServer')
+    .controller('DashboardCtrl',DashboardCtrl)
+    .controller('CreateServerModalCtrl',CreateServerModalCtrl)
+    .filter('progress',progress);
+
 })(angular);

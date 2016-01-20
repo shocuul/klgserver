@@ -1,6 +1,6 @@
 (function(angular){
   "use strict";
-  angular.module('kls.directives').directive('tslider',function(){
+  function tslider(){
     return{
       restrict:'E',
       scope:{
@@ -26,7 +26,10 @@
         
       }
     }
-  });
+  };
+  
+  angular.module('KaosLatinServer')
+    .directive('tslider',tslider);
 })(angular);
 
   

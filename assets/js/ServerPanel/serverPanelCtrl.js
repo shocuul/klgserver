@@ -1,8 +1,10 @@
 (function(angular){
   "use strict";
-  angular.module('kls.controllers').controller('ServerPanelCtrl',['$sails','$http','CurrentUser','selectServer','ServerControl','$uibModal','Upload',controller]);
   
-  function controller($scope,$sails,$http,CurrentUser, selectServer, ServerControl, $uibModal, Upload){
+  /**
+   * @name ServerPanelCtrl
+   */
+  function ServerPanelCtrl($sails,$http,CurrentUser, selectServer, ServerControl, $uibModal, Upload){
     var vm = this;
     vm.server = selectServer;
     vm.breadcrumb = [];
@@ -141,4 +143,7 @@
       })
     }
   }
+  
+    angular.module('KaosLatinServer')
+        .controller('ServerPanelCtrl',ServerPanelCtrl);
 })(angular);

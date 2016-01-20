@@ -1,10 +1,12 @@
 (function(angular){
   "use strict";
-  var app = angular.module('kls.directives',[]);
   
-  app.factory('focus',['$timeout','$window', factory]);
-  
-  function factory($timeout,$window){
+  /**
+   * @name focus
+   * @desc Focus Factory
+   * @ngInject
+   */
+  function focus($timeout,$window){
     return function(id){
       // timeout makes sure that it is invoked after any other event has been triggered.
       // e.g. click events that need to run before the focus or
@@ -18,8 +20,12 @@
     }
   }
   
-  app.directive('eventFocus',directive);
-  function directive(){
+  /**
+   * @name eventFocus
+   * @desc Event Focus
+   * @ngInject
+   */
+  function eventFocus(){
     
     return blurAndFocus;
     
@@ -33,4 +39,9 @@
       });
     }
   }
+  
+  angular.module('KaosLatinServer')
+  .factory('focus',focus)
+  .directive('eventFocus',eventFocus);
+  
 })(angular);

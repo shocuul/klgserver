@@ -1,6 +1,5 @@
 (function(angular){
-  angular.module('kls.controllers',[]).controller('HomeController',controller);
-    function controller(){
+    function HomeController(){
       var vm = this;
       vm.serversCS16 = [
       {
@@ -113,5 +112,7 @@
 		  '/images/cs16Banner.jpg'
 	  ];
     }
+    
+    angular.module('KaosLatinServer').controller('HomeController',HomeController);
   
 })(angular);

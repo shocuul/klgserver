@@ -1,8 +1,10 @@
 (function(angular){
   "use strict";
-  angular.module('kls.controllers',[]).controller('LoginCtrl',['$state','Auth',controller]);
-  
-  function controller($state,Auth){
+  /**
+   * @name LoginCtrl
+   * @desc Login Controller
+   * @ngInject */  
+  function LoginCtrl($state,Auth){
     var vm = this;
     vm.errors = [];
     vm.login = login;
@@ -17,4 +19,7 @@
       })
     }
   }
+  
+  angular.module('KaosLatinServer').controller('LoginCtrl',LoginCtrl);
+  
 })(angular);

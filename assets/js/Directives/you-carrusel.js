@@ -1,6 +1,10 @@
 (function(angular){
   "use strict";
-  angular.module('kls.directives').directive('serverc',function(){
+  /**
+   * @name serverc
+   * @desc Carrouse Directive
+   */
+  function serverc(){
     return {
       restrict:'E',
       replace:true,
@@ -36,65 +40,12 @@
                   }
               }
           })
-        };
-        // if (scope.$last) setTimeout(function(){
-        //   console.log("Ultimo repeat")
-        //   element.owlCarousel({
-        //       loop:true,
-        //       stagePadding: 70,
-        //       nav:true,
-        //       dots: false,
-        //       autoplay: true,
-        //       autoplayTimeout: false,
-        //       autoplaySpeed: 600,
-        //       autoplayHoverPause: true,
-        //       navText: ['', ''],
-        //       responsive:{
-        //           0:{
-        //               items:1
-        //           },
-        //           500:{
-        //               items:2
-        //           },
-        //           992:{
-        //               items:3
-        //           },
-        //           1200:{
-        //               items:4
-        //           }
-        //       }
-        //   })
-        // }, 0.0001);
-        // element.find('.youplay-carousel').owlCarousel({
-        //     loop:true,
-        //     stagePadding: 70,
-        //     nav:true,
-        //     dots: false,
-        //     autoplay: true,
-        //     autoplayTimeout: false,
-        //     autoplaySpeed: 600,
-        //     autoplayHoverPause: true,
-        //     navText: ['', ''],
-        //     responsive:{
-        //         0:{
-        //             items:1
-        //         },
-        //         500:{
-        //             items:2
-        //         },
-        //         992:{
-        //             items:3
-        //         },
-        //         1200:{
-        //             items:4
-        //         }
-        //     }
-        // }
-
+        }
       }
     }
-  })
-  .directive('onLastRepeat', function() {
+  }
+  
+  function onLastRepeat() {
         return function(scope, element, attrs) {
             if (scope.$last) setTimeout(function(){
               element.parent().owlCarousel({
@@ -125,8 +76,12 @@
             }, 1);
             
         };
-    });
-  
+    };
+    
+    angular
+        .module('KaosLatinServer')
+        .directive('serverc',serverc)
+        .directive('onLastRepeat',onLastRepeat);
 })(angular);
 
 
