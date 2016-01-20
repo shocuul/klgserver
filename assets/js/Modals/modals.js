@@ -1,7 +1,7 @@
 (function(angular){
 	"use strict";
 	
-	var app = angular.module('KLGServerApp');
+	var app = angular.module('kls.controllers',[]);
 	app.controller('EditFileModalCtrl',['$uibModalInstance','file','ServerControl',editController]);
 	
 	app.controller('RenameFileModal',['$uibModalInstance','file',renameController]);

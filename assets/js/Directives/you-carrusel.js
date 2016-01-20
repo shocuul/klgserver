@@ -1,12 +1,13 @@
-angular.module('KLGServerApp')
-  .directive('serverc',function(){
+(function(angular){
+  "use strict";
+  angular.module('kls.directives').directive('serverc',function(){
     return {
       restrict:'E',
       replace:true,
       scope:{
         servers:'=servers'
       },
-      templateUrl:'directives-html/you-carrusel.html',
+      templateUrl:'Directives/you-carrusel.html',
       link:function(scope, element, atts){
         if (scope.$last) {
           //console.log("Ultimo repeat")
@@ -95,9 +96,7 @@ angular.module('KLGServerApp')
   })
   .directive('onLastRepeat', function() {
         return function(scope, element, attrs) {
-          
             if (scope.$last) setTimeout(function(){
-              console.log("Ultimo repeat")
               element.parent().owlCarousel({
                   loop:true,
                   stagePadding: 70,
@@ -127,3 +126,8 @@ angular.module('KLGServerApp')
             
         };
     });
+  
+})(angular);
+
+
+  

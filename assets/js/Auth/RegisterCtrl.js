@@ -1,6 +1,6 @@
 (function(angular){
   "use strict";
-  angular.module('KLGServerApp').controller('RegisterCtrl',['$state','Auth',controller]);
+  angular.module('kls.controllers',[]).controller('RegisterCtrl',['$state','Auth',controller]);
   
   function controller($state,Auth){
     var vm = this;

@@ -1,6 +1,8 @@
-angular.module('KLGServerApp')
-  .controller('HomeController', function($scope){
-    $scope.serversCS16 = [
+(function(angular){
+  angular.module('kls.controllers',[]).controller('HomeController',controller);
+    function controller(){
+      var vm = this;
+      vm.serversCS16 = [
       {
         name:'Counter Strike 1.6 Bronze',
         image:'images/cs16ServerBack.jpg',
@@ -30,7 +32,8 @@ angular.module('KLGServerApp')
         price:'$40'
       }
     ]
-    $scope.serversCSGO = [
+    
+    vm.serversCSGO = [
       {
         name:'Counter Strike GO1',
         image:'images/csgoServerBack.jpg',
@@ -67,7 +70,7 @@ angular.module('KLGServerApp')
         price:'$50'
       }
     ]
-    $scope.serversMinecraft = [
+    vm.serversMinecraft = [
       {
         name:'Minecraft 0.5',
         image:'images/minecraftServerBack.jpg',
@@ -104,9 +107,11 @@ angular.module('KLGServerApp')
         price: '$30'
       }
     ]
-	  $scope.image = [
+    vm.image = [
 		  '/images/csgoBanner.jpg',
 		  '/images/minecraftBanner.jpg',
 		  '/images/cs16Banner.jpg'
 	  ];
-  });
+    }
+  
+})(angular);

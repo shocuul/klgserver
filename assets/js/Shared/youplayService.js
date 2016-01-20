@@ -13,7 +13,7 @@
 (function(window, navigator, angular, $){
 	'use strict';
 	/* You Play Instance Service */
-	angular.module('KLGServerApp').service('youplay',function(){
+	angular.module('kls.services').service('youplay',function(){
     var YP = function(options){
       var _this = this;
       _this.options = options

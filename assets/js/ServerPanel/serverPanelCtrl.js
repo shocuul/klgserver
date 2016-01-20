@@ -1,6 +1,6 @@
 (function(angular){
   "use strict";
-  angular.module('KLGServerApp').controller('ServerPanelCtrl',['$sails','$http','CurrentUser','selectServer','ServerControl','$uibModal','Upload',controller]);
+  angular.module('kls.controllers').controller('ServerPanelCtrl',['$sails','$http','CurrentUser','selectServer','ServerControl','$uibModal','Upload',controller]);
   
   function controller($scope,$sails,$http,CurrentUser, selectServer, ServerControl, $uibModal, Upload){
     var vm = this;
@@ -12,7 +12,7 @@
     vm.stop = stop;
     vm.uploadFiles = uploadFiles;
     vm.rename = rename;
-    vm.delete = delete;
+    vm.delete = deleteFile;
     vm.goToRoot = goToRoot;
     vm.getTree = getTree;
     vm.changeFolder = changeFolder;
@@ -55,7 +55,7 @@
       })
     }
     
-    function delete(item){
+    function deleteFile(item){
       var confirmModal = $uibModal.open({
         animation:true,
         templateUrl:'modals/message.html',

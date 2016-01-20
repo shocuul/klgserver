@@ -1,11 +1,12 @@
-angular.module('KLGServerApp')
-  .directive('tslider',function(){
+(function(angular){
+  "use strict";
+  angular.module('kls.directives').directive('tslider',function(){
     return{
       restrict:'E',
       scope:{
         images:'=images'
       },
-      templateUrl:'directives-html/you-slider.html',
+      templateUrl:'Directives/you-slider.html',
       link:function(scope, element, atts){
         
         var rsOptions = {
@@ -26,3 +27,6 @@ angular.module('KLGServerApp')
       }
     }
   });
+})(angular);
+
+  

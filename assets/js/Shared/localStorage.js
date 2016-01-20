@@ -1,14 +1,23 @@
-angular.module('KLGServerApp')
-  .factory('LocalService',function(){
-  return {
-    get: function(key){
+(function(angular){
+  "use strict";
+  angular.module('kls.services').factory('LocalService', factory);
+  function factory(){
+    return {
+      get: get,
+      set: set,
+      unset: unset
+    }
+    function get(key){
       return localStorage.getItem(key);
-    },
-    set: function(key, val){
+    }
+    
+    function set(key,val){
       return localStorage.setItem(key,val);
-    },
-    unset: function(key){
+    }
+    
+    function unset(key){
       return localStorage.removeItem(key);
     }
+    
   }
-});
+})(angular);

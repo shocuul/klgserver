@@ -1,9 +1,6 @@
 (function(angular){
   "use strict";
-  
-  angular.module('KLSServerApp')
-    .config(['$stateProvider','$urlRouterProvider','AccessLevels',configureStates]);
-    
+  angular.module('KaosLatinServer').config(['$stateProvider','$urlRouterProvider','AccessLevels',configureStates]);
   function configureStates($stateProvider,$urlRouterProvider,AccessLevels){
     $stateProvider
       .state('anon',{
@@ -15,18 +12,19 @@
     })
     .state('anon.home',{
       url:'/',
-      templateUrl:'home.html',
-      controller:'HomeController'
+      templateUrl:'Home/home.html',
+      controller:'HomeController',
+      controllerAs:'vm'
     })
     .state('anon.login',{
       url:'/login',
-      templateUrl:'auth/login.html',
+      templateUrl:'Auth/login.html',
       controller: 'LoginCtrl',
       controllerAs:'vm'
     })
     .state('anon.register',{
       url:'/register',
-      templateUrl:'auth/register.html',
+      templateUrl:'Auth/register.html',
       controller:'RegisterCtrl',
       controllerAs:'vm'
     });
@@ -41,8 +39,9 @@
       })
       .state('user.dashboard',{
         url:'/dashboard',
-        templateUrl:'user/dashboard.html',
+        templateUrl:'User/dashboard.html',
         controller:'DashboardCtrl',
+        controllerAs:'vm',
         resolve:{
         servers:function(ServerService){
              return ServerService.getAll();
@@ -60,8 +59,9 @@
       })
       .state('server.dashboard',{
         url:'/server/:idServer',
-        templateUrl:'server/panel.html',
+        templateUrl:'ServerPanel/panel.html',
         controller:'ServerPanelCtrl',
+        controllerAs:'vm',
         resolve:{
           selectServer:function($stateParams, ServerControl){
             return ServerControl.getServerInfo($stateParams.idServer);

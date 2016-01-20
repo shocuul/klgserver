@@ -52,8 +52,12 @@ var jsFilesToInject = [
   'js/dependencies/angular-ui-router.js',
   'js/dependencies/angular-animate.min.js',
   'js/dependencies/angular-aria.min.js',
+  
 
   'js/dependencies/**/*.js',
+  
+  'js/app.js',
+  'js/routes.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.

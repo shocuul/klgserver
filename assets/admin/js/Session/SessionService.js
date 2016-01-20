@@ -1,4 +1,4 @@
-(function(angular){
+/*(function(angular){
 	"use strict";
 	angular.module('KLSAdmin')
 	.service('SessionService',function(){
@@ -19,3 +19,4 @@
 		}
 	})
 })(angular);
+*/

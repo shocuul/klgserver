@@ -1,10 +1,8 @@
 (function(angular){
-  var app = angular.module('KLGServerApp');
-  app.factory('Auth',['$http','LocalService','AccessLevels',authFactory]);
-  
-  app.factory('AuthInterceptor',['$q','$injector',authInterceptor]);
-  
-  app.config(pushInterceptor);
+  var app = angular.module('kls.services')
+  .factory('Auth',['$http','LocalService','AccessLevels',authFactory])
+  .factory('AuthInterceptor',['$q','$injector',authInterceptor])
+  .config(pushInterceptor);
   
   
   function authFactory($http,LocalService,AccessLevels){

@@ -1,8 +1,10 @@
 (function(angular){
   
-  var app = angular.module('KLGServerApp',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload']);
-
-  app.run(['$rootScope','$state','Auth','CurrentUser','ServerService','youplay',function($rootScope,$state,Auth,CurrentUser, ServerService, youplay){
+  var app = angular.module('KaosLatinServer',['ngSails','app-templates','ui.router','ngMessages','ui.bootstrap','ngFileUpload','kls.controllers','kls.directives','kls.services']);
+ 
+  app.run(['$rootScope','$state','Auth','CurrentUser','ServerService','youplay',runFunctions]);
+  
+  function runFunctions($rootScope,$state,Auth,CurrentUser,ServerService,youplay){
     console.log("¿Bienvenido a KLS que haces por aqui?");
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
       if(toState.name=="server.dashboard"){
@@ -25,12 +27,12 @@
       });
     });
 
-})];
+  }
 
 
-  app.config(['$sailsProvider', function($sailsProvider){
+  app.config(function($sailsProvider){
     $sailsProvider.url = '/';
-  }]);
+  });
 })(angular);
 // var app = angular.module('KLGServerApp', ['ngMaterial', 'ngSails']);
 //

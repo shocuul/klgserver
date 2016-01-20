@@ -1,7 +1,7 @@
 (function(angular){
 	"use strict";
 	
-	angular.module('KLGServerApp').factory('ServerControl',['$sails',factory]);
+	angular.module('kls.services').factory('ServerControl',['$sails',factory]);
 	
 	function factory($sails){
 		var currentServer = currentServer || {};
