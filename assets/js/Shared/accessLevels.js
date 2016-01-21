@@ -1,6 +1,6 @@
 (function(angular){
   "use strict";
-  angular.module('kls.services',[])
+  angular.module('ServerControl')
     .constant('AccessLevels',{
     anon:0,
     user:1

@@ -1,7 +1,10 @@
 (function(angular){
   "use strict";
-  angular.module('kls.services').factory('LocalService', factory);
-  function factory(){
+  /**
+   * @name LocalServices
+   * @desc Storage and Get localstorage items
+   */
+  function LocalService(){
     return {
       get: get,
       set: set,
@@ -18,6 +21,8 @@
     function unset(key){
       return localStorage.removeItem(key);
     }
-    
   }
+  
+  angular.module('KaosLatinServer')
+  .factory('LocalService',LocalService);
 })(angular);

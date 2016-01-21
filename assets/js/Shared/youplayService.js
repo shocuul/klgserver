@@ -13,7 +13,8 @@
 (function(window, navigator, angular, $){
 	'use strict';
 	/* You Play Instance Service */
-	angular.module('kls.services').service('youplay',function(){
+	
+    function youplay(){
     var YP = function(options){
       var _this = this;
       _this.options = options
@@ -600,6 +601,8 @@
     
     
     return new YP( YP.DEFAULT );
-  });
+  };
+  
+  angular.module('KaosLatinServer').factory('youplay',youplay);
 	
 })(window, navigator, angular, jQuery);

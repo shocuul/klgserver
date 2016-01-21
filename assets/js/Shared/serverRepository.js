@@ -1,12 +1,11 @@
 (function(angular){
 	"use strict";
-	var app = angular.module('kls.services');
-	app.factory('ServerService',['CurrentUser','$sails','$filter',factory]);
 	
-	app.filter('getIndex', filter);
-	
-	
-	function factory(){
+	/**
+     * @name ServerService
+     * @ngInject
+     */
+	function ServerService(CurrentUser,$sails,$filter){
 
 		var currentUser = CurrentUser.user,
 			UserServers = UserServers || [];
@@ -61,7 +60,7 @@
 		}
 	}
 	
-	function filter(){
+	function getIndex(){
 		return function(input, id){
 			var i = 0,
 				len = input.length;
@@ -73,5 +72,9 @@
 			return null;
 		}
 	}
+    
+    angular.module('KaosLatinServer')
+    .factory('ServerService',ServerService)
+    .filter('getIndex',getIndex);
 	
 })(angular);

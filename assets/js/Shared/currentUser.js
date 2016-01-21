@@ -1,8 +1,11 @@
 (function(angular){
   "use strict";
-  angular.module('kls.services').factory('CurrentUser',['LocalService',factory]);
-  
-  function factory(){
+  /**
+   * @name CUrrentUser
+   * @desc return the current user 
+   * @ngInject
+   */
+  function CurrentUser(LocalService){
     return {
       user : user
     }
@@ -14,6 +17,9 @@
       }
     }
   }
+  
+  angular.module('KaosLatinServer')
+    .factory('CurrentUser',CurrentUser);
   
 })(angular);
 /*directive('showDuringResolve', function($rootScope){
