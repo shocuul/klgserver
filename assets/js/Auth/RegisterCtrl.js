@@ -7,6 +7,7 @@
     vm.register = register;
     
     function register(){
+      console.log(vm.user)
       Auth.register(vm.user).then(function(){
         $state.go('anon.home');
       }),function(err){

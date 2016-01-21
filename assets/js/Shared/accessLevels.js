@@ -1,6 +1,6 @@
 (function(angular){
   "use strict";
-  angular.module('ServerControl')
+  angular.module('KaosLatinServer')
     .constant('AccessLevels',{
     anon:0,
     user:1

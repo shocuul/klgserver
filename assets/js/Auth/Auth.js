@@ -7,19 +7,17 @@
      */
     function Auth ($http,LocalService,AccessLevels){
         var currentUser = {};
-        var service = {
-            authorize: authorize,
-            isAutenticated: isAuthenticated,
-            login: login,
-            logout:logout,
-            register:register,
-            currentUser:currentUser
-        }
-        return service;
+        
+            this.authorize = authorize;
+            this.isAutenticated = isAuthenticated;
+            this.login = login;
+            this.logout = logout;
+            this.register=register;
+            this.currentUser=currentUser;
         /* Auth Factory Functions */
         function authorize(access){
             if(access == AccessLevels.user){
-                return this.isAuthenticated();
+                return isAuthenticated();
             }else{
                 return true;
             }
@@ -43,7 +41,7 @@
             currentUser = {};
         }
         
-        function register(){
+        function register(formData){
             LocalService.unset('auth_token');
             var register = $http.post('/auth/register', formData);
             register.success(function(result){
@@ -97,7 +95,7 @@
      */
     angular
         .module('KaosLatinServer')
-        .factory('Auth',Auth)
+        .service('Auth',Auth)
         .factory('AuthInterceptor',AuthInterceptor)
         .config(pushInterceptor);
 })(angular);

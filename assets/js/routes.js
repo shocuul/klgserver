@@ -1,7 +1,9 @@
 (function(angular){
   "use strict";
-  angular.module('KaosLatinServer').config(['$stateProvider','$urlRouterProvider','AccessLevels',configureStates]);
-  function configureStates($stateProvider,$urlRouterProvider,AccessLevels){
+  
+  
+  
+  function routes($stateProvider,$urlRouterProvider,AccessLevels){
     $stateProvider
       .state('anon',{
         abstract: true,
@@ -36,14 +38,8 @@
         data:{
           access: AccessLevels.user
         }
-      })
-      .state('user.dashboard',{
-        url:'/dashboard',
-        templateUrl:'User/dashboard.html',
-        controllerAs:'vm',
-        controller:'DashboardCtrl',
-        resolve:DashboardCtrl.resolve
       });
+      
 
     $stateProvider
       .state('server',{
@@ -52,21 +48,13 @@
         data:{
           access: AccessLevels.user
         }
-      })
-      .state('server.dashboard',{
-        url:'/server/:idServer',
-        templateUrl:'ServerPanel/panel.html',
-        controller:'ServerPanelCtrl',
-        controllerAs:'vm',
-        resolve:{
-          selectServer:function($stateParams, ServerControl){
-            return ServerControl.getServerInfo($stateParams.idServer);
-          }
-        }
       });
+      
 
     $urlRouterProvider.otherwise('/');
 }
+
+angular.module('KaosLatinServer').config(routes);
   
   
 })(angular);

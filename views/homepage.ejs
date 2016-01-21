@@ -39,9 +39,9 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="vm.auth.isAuthenticated()" class="dropdown dropdown-hover">
+        <li ng-show="vm.auth.isAutenticated()" class="dropdown dropdown-hover">
           <a href="#!" class="dropdown-toggle" role="button" aria-expanded="false">
-            {{$root.currentUser.name}} <span class="badge bg-default">0</span> <span class="caret"></span> <span class="label">{{$root.currentUser.email}}</span>
+            {{vm.currentUser.name}} <span class="badge bg-default">0</span> <span class="caret"></span> <span class="label">{{vm.currentUser.email}}</span>
           </a>
           <div class="dropdown-menu">
             <ul role="menu">
@@ -52,8 +52,8 @@
             </ul>
           </div>
         </li>
-        <li ng-hide="vm.auth.isAuthenticated()"><a href="#/register">Registrarse</a></li>
-        <li ng-hide="vm.auth.isAuthenticated()"><a href="#/login">Iniciar sesion</a></li>
+        <li ng-hide="vm.auth.isAutenticated()"><a href="#/register">Registrarse</a></li>
+        <li ng-hide="vm.auth.isAutenticated()"><a href="#/login">Iniciar sesion</a></li>
       </ul>
     </div>
   </div>

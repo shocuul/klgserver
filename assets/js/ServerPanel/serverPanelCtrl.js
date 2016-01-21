@@ -144,6 +144,22 @@
     }
   }
   
+  ServerPanelCtrl.resolve = {
+    selectServer:function($stateParams,ServerControl){
+      return ServerControl.getServerInfo($stateParams.idServer);
+    }
+  }
+  
+  function config($stateProvider){
+    $stateProvider.state('server.dashboard',{
+        url:'/server/:idServer',
+        templateUrl:'ServerPanel/panel.html',
+        controller:'ServerPanelCtrl',
+        controllerAs:'vm',
+        resolve:ServerPanelCtrl.resolve,
+      });
+  }
     angular.module('KaosLatinServer')
-        .controller('ServerPanelCtrl',ServerPanelCtrl);
+        .controller('ServerPanelCtrl',ServerPanelCtrl)
+        .config(config);
 })(angular);

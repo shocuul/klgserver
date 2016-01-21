@@ -11,7 +11,7 @@
     console.log("¿Bienvenido a KLS que haces por aqui?");
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
       if(toState.name=="server.dashboard"){
-        var serverExist = ServerService.checkifExist(toParams.idServer);
+        var serverExist = ServerService.checkIfExist(toParams.idServer);
         if(serverExist == null || serverExist == undefined){
           event.preventDefault();
           $state.go('user.dashboard');

@@ -98,10 +98,20 @@
       }
   }
   
+  function config($stateProvider){
+    $stateProvider.state('user.dashboard',{
+        url:'/dashboard',
+        templateUrl:'User/dashboard.html',
+        controllerAs:'vm',
+        controller:'DashboardCtrl',
+        resolve:DashboardCtrl.resolve
+      });
+  }
   angular
     .module('KaosLatinServer')
     .controller('DashboardCtrl',DashboardCtrl)
     .controller('CreateServerModalCtrl',CreateServerModalCtrl)
-    .filter('progress',progress);
+    .filter('progress',progress)
+    .config(config);
 
 })(angular);

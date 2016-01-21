@@ -6,17 +6,13 @@
      * @ngInject
      */
 	function ServerService(CurrentUser,$sails,$filter){
+		this.getAll = getAll;
+		this.create = create;
+		this.remove = remove;
+		this.checkIfExist = checkIfExist;
 
-		var currentUser = CurrentUser.user,
-			UserServers = UserServers || [];
-	
-		var service = {
-			getAll : getAll,
-			create: create,
-			remove: remove,
-			checkIfExist: checkIfExist
-		}
-		return service;
+		var currentUser = CurrentUser.user;
+		var UserServers = UserServers || [];
 	
 		function getAll(){
 			return $sails.get('/user/'+currentUser().id+'/servers').then(function(response){
@@ -74,7 +70,7 @@
 	}
     
     angular.module('KaosLatinServer')
-    .factory('ServerService',ServerService)
+    .service('ServerService',ServerService)
     .filter('getIndex',getIndex);
 	
 })(angular);

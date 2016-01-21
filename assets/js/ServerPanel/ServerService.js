@@ -29,7 +29,7 @@
         	})
 		}
 		
-		function getTree(){
+		function getTree(idResource){
 			if(idResource != undefined){
 				var data = {
 					id: idResource
@@ -42,7 +42,7 @@
 			})
 		}
 		
-		function getResource(){
+		function getResource(idResource){
 			var data = {
           		resource: idResource
         	}

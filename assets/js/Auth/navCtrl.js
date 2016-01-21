@@ -7,9 +7,13 @@
    */
   function NavCtrl(Auth, CurrentUser, $state, $rootScope){
     var vm = this;
-    vm.auth = Auth;
+   
     vm.logout = logout;
+    vm.auth = Auth;
     
+    $rootScope.$on('$stateChangeStart',function(event,toState,toParams,fromState,formParams){
+      vm.currentUser = CurrentUser.user();
+    });
     function logout(){
       $state.go('anon.login');
       Auth.logout();
