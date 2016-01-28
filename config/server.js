@@ -19,5 +19,9 @@ module.exports.server = {
 	csgoBaseDir:'/home/developer/csgo/',
 	serverBaseDir:'/home/developer/Servers/',
 	cs16BaseDir:'/home/developer/cs16/',
-	steamCmdDir:'/home/developer/steamcmd/'
+	steamCmdDir:'/home/developer/steamcmd/',
+	// Default admin y password
+	name:'Jose David Pacheco ',
+	email:'josepdark@gmail.com',
+	password:'by45nt5k4n'
 }
