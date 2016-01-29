@@ -27,7 +27,10 @@ var checkForAdminUser = function(){
   });
   return deferred;
 }
-
+//option_name steamcmdDir , cs16 BaseDir ,
+var defaultValues = {
+  dir-minacraft-spigot:''
+}
 var checkForRequiredValues = function(){
   Options.find().exec(function(err, options){
     sails.log(options.length);

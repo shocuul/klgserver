@@ -23,5 +23,5 @@ module.exports.server = {
 	// Default admin y password
 	name:'Jose David Pacheco ',
 	email:'josepdark@gmail.com',
-	password:'by45nt5k4n'
+	password:'by45nt5k4n',
 }
