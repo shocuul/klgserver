@@ -26,6 +26,7 @@ module.exports.bootstrap = function(cb) {
     exit(0);
   }else{
     ServersManager.create();
+    CoreManager.prepareDirs();
     // Se crea la opcion port number para llevar un control de los puestos del servidor.
     Options.findOrCreate({option_name:'port_number'},{option_name:'port_number',option_value:'27000'}).exec(function(err, record){
       sails.log("Se creo la opcion port number" + record.option_value);

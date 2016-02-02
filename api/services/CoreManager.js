@@ -29,7 +29,7 @@ var checkForAdminUser = function(){
 }
 //option_name steamcmdDir , cs16 BaseDir ,
 var defaultValues = {
-  dir-minacraft-spigot:''
+  dir_minacraft_spigot: ''
 }
 var checkForRequiredValues = function(){
   Options.find().exec(function(err, options){
@@ -39,8 +39,24 @@ var checkForRequiredValues = function(){
   })
 }
 
+var prepareDirs = function(){
+  var folders = __filename.split('/');
+  folders.shift();
+  var pivot = 0;
+  for (var i = 0; i < folders.length; i++) {
+    if (folders[i] == "home") {
+      pivot = i;
+    }
+  }
+  pivot = pivot + 2;
+  folders.splice(pivot,folders.length);
+  folders = '/' + folders.join('/');
+  sails.log(folders);
+}
+
 
 module.exports = {
   checkForAdminUser : checkForAdminUser,
-  checkForRequiredValues : checkForRequiredValues
+  checkForRequiredValues : checkForRequiredValues,
+  prepareDirs : prepareDirs
 }
