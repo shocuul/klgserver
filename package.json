@@ -1,14 +1,14 @@
 {
-  "name": "sails-angular-material",
-  "version": "0.1.6",
-  "description": "a Sails application using Angular Material",
+  "name": "klservers",
+  "version": "0.0.9alpha2",
+  "description": "Web App for manage game servers rent for KLS",
   "keywords": [
-    "mvc",
-    "mvvm",
-    "realtime",
+    "server",
+    "game",
+    "csgo",
     "sails",
     "angular",
-    "material"
+    "minecraft"
   ],
   "dependencies": {
     "bcrypt": "^0.8.3",
@@ -44,8 +44,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mwils-bp/sails-angular-material.git"
+    "url": "git://github.com/shocuul/klgserver.git"
   },
-  "author": "unsplit",
+  "author": "denethiel",
   "license": ""
 }
