@@ -1,6 +1,8 @@
 //function for check if admin user exist if not create new with config data
+var fs = require('fs');
+var steamCMDDir, csGoDir
+var Promise = require('promise');
 var checkForAdminUser = function(){
-  var Promise = require('promise');
   var deferred = new Promise(function(resolve, reject){
     User.findOne({admin:true}).exec(function(err, record){
       if(record){
@@ -42,21 +44,22 @@ var checkForRequiredValues = function(){
 var prepareDirs = function(){
   var folders = __filename.split('/');
   folders.shift();
-  var pivot = 0;
-  for (var i = 0; i < folders.length; i++) {
-    if (folders[i] == "home") {
-      pivot = i;
-    }
-  }
-  pivot = pivot + 2;
+  var pivot = 2;
   folders.splice(pivot,folders.length);
-  folders = '/' + folders.join('/');
-  sails.log(folders);
+  folders = '/' + folders.join('/') + '/';
+  // Create Default Installation Folders
+  steamcmdDir = folders + 'kls/install/steamcmd';
+  csGoDir = folders + 'kls/install/csgo';
+  //Create directories
+  mkdir('-p', steamcmdDir, csGoDir);
+  sails.log(steamcmdDir);
+  sails.log(csGoDir);
 }
 
 
 module.exports = {
   checkForAdminUser : checkForAdminUser,
   checkForRequiredValues : checkForRequiredValues,
-  prepareDirs : prepareDirs
+  prepareDirs : prepareDirs,
+  steamcmdDir
 }
