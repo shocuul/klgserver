@@ -1,6 +1,7 @@
 //function for check if admin user exist if not create new with config data
 var fs = require('fs');
-var steamCMDDir, csGoDir
+var steamcmdDir;
+var csgoDir;
 var Promise = require('promise');
 var checkForAdminUser = function(){
   var deferred = new Promise(function(resolve, reject){
@@ -41,19 +42,51 @@ var checkForRequiredValues = function(){
   })
 }
 
+var installSteamCmd = function(){
+  var deferred = new Promise(function(resolve, reject){
+    var shell = require('shelljs');
+    shell.cd(steamcmdDir);
+    if (!test('-f', steamcmdDir + 'steamcmd.sh')){
+      // Steamcmd no instalado
+      shell.exec('wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz');
+      sails.log("Archivo Existe");
+      shell.exec('tar -xvzf steamcmd_linux.tar.gz');
+      shell.exec('./steamcmd.sh +quit');
+      resolve();
+    }else{
+      // Steam Instalado
+      resolve();
+    };
+  })
+  return deferred;
+}
+
+var installCsgo = function(){
+  var deferred = new Promise(function(resolve, reject){
+    var shell = require('shelljs');
+    shell.cd(steamcmdDir);
+    shell.exec('./steamcmd.sh +login anonymous +force_install_dir '+ csgoDir +' +app_update 740 +quit');
+    resolve();
+  })
+  return deferred;
+}
+
 var prepareDirs = function(){
   var folders = __filename.split('/');
   folders.shift();
   var pivot = 2;
   folders.splice(pivot,folders.length);
-  folders = '/' + folders.join('/') + '/';
+  folders = '/' + folders.join('/');
   // Create Default Installation Folders
-  steamcmdDir = folders + 'kls/install/steamcmd';
-  csGoDir = folders + 'kls/install/csgo';
+  steamcmdDir = folders + sails.config.server.steamCmdDir;
+  csgoDir = folders + sails.config.server.csgoBaseDir;
   //Create directories
-  mkdir('-p', steamcmdDir, csGoDir);
+  mkdir('-p', steamcmdDir, csgoDir);
   sails.log(steamcmdDir);
-  sails.log(csGoDir);
+  sails.log(csgoDir);
+  installSteamCmd().then(function(){
+    installCsgo();
+  });
 }
 
 
@@ -61,5 +94,6 @@ module.exports = {
   checkForAdminUser : checkForAdminUser,
   checkForRequiredValues : checkForRequiredValues,
   prepareDirs : prepareDirs,
-  steamcmdDir
+  steamcmdDir: steamcmdDir,
+  csgoDir:csgoDir
 }

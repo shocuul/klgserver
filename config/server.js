@@ -16,12 +16,13 @@ module.exports.server = {
 	},//130
 	ip:'192.168.1.67',
 	//Configuracion de casa
-	csgoBaseDir:'/home/developer/csgo/',
 	serverBaseDir:'/home/developer/Servers/',
 	cs16BaseDir:'/home/developer/cs16/',
-	steamCmdDir:'/home/developer/steamcmd/',
 	// Default admin y password
 	name:'Jose David Pacheco ',
 	email:'josepdark@gmail.com',
 	password:'by45nt5k4n',
+	//Donde se instalara el servidor Base de CSGO
+	csgoBaseDir:'/kls/install/csgo/',
+  steamCmdDir:'/kls/install/steamcmd/',
 }
