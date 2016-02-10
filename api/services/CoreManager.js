@@ -12,7 +12,7 @@ var checkForAdminUser = function(){
       }else{
         sails.log.info('------------------------------');
         sails.log.info('No admin user found, creating one...');
-        User.create({name: sails.config.server.name, email: sails.config.server.email, password: sails.config.server.password}).exec(function(err,user){
+        User.create({name: sails.config.server.name, email: sails.config.server.email, password: sails.config.server.password,admin:true}).exec(function(err,user){
           if(err){
             sails.log(err);
             reject(err);
@@ -51,6 +51,7 @@ var installSteamCmd = function(){
       shell.exec('wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz');
       sails.log("Archivo Existe");
       shell.exec('tar -xvzf steamcmd_linux.tar.gz');
+      shell.rm('steamcmd_linux.tar.gz');
       shell.exec('./steamcmd.sh +quit');
       resolve();
     }else{
@@ -89,11 +90,19 @@ var prepareDirs = function(){
   });
 }
 
+function returnVar (varName){
+  if(varName == 'steam'){
+    return steamcmdDir;
+  }
+  if(varName == 'csgo'){
+    return csgoDir;
+  }
+}
 
 module.exports = {
   checkForAdminUser : checkForAdminUser,
   checkForRequiredValues : checkForRequiredValues,
   prepareDirs : prepareDirs,
-  steamcmdDir: steamcmdDir,
-  csgoDir:csgoDir
+  steamcmdDir: returnVar('steam'),
+  csgoDir:returnVar('csgo')
 }

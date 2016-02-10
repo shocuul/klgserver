@@ -112,6 +112,10 @@ module.exports = {
 
         break;
       case 'csgo':
+        var test = CoreManager.csgoDir;
+        sails.log(test);
+        var csgoDir = CoreManager.csgoDir();
+        sails.log(csgoDir);
         break;
       case 'minecraft':
         var fs = require('fs');
