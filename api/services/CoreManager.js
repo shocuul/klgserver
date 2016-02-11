@@ -6,6 +6,7 @@ var Promise = require('promise');
 var checkForAdminUser = function(){
   var deferred = new Promise(function(resolve, reject){
     User.findOne({admin:true}).exec(function(err, record){
+      sails.log(record);
       if(record){
         sails.log('Admin User Found' + record.email);
         resolve();
@@ -83,6 +84,8 @@ var prepareDirs = function(){
   csgoDir = folders + sails.config.server.csgoBaseDir;
   //Create directories
   mkdir('-p', steamcmdDir, csgoDir);
+  ValuesManager.saveValue('steamcmd',steamcmdDir);
+  ValuesManager.saveValue('csgoDir',csgoDir);
   sails.log(steamcmdDir);
   sails.log(csgoDir);
   installSteamCmd().then(function(){
