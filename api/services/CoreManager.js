@@ -53,7 +53,7 @@ var installSteamCmd = function(){
       sails.log("Archivo Existe");
       shell.exec('tar -xvzf steamcmd_linux.tar.gz');
       shell.rm('steamcmd_linux.tar.gz');
-      shell.exec('./steamcmd.sh +quit');
+      shell.exec('./steamcmd.sh +quit', {async:true});
       resolve();
     }else{
       // Steam Instalado
@@ -67,7 +67,7 @@ var installCsgo = function(){
   var deferred = new Promise(function(resolve, reject){
     var shell = require('shelljs');
     shell.cd(steamcmdDir);
-    shell.exec('./steamcmd.sh +login anonymous +force_install_dir '+ csgoDir +' +app_update 740 +quit');
+    shell.exec('./steamcmd.sh +login anonymous +force_install_dir '+ csgoDir +' +app_update 740 +quit',{async:true});
     resolve();
   })
   return deferred;

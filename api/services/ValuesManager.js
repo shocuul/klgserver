@@ -1,15 +1,28 @@
 function getAllValues(){
 
   Options.find().exec(function(err, records){
-    sails.log(records);
-    for (var value in records.toObject()) {
-      sails.log(value);
+    var steam, csgo, port;
+    for (var i = 0; i < records.length; i++) {
+      switch (records[i].option_name) {
+        case "steamcmd":
+          steam = records[i].option_value;
+          break;
+        case "csgoDir":
+          csgo = records[i].option_value;
+          break;
+        case "port_number":
+          port = records[i].option_value;
+          break;
+        default:
+
+      }
     }
   })
 
   return {
-    steamcmd:'',
-    csgoDir:'',
+    steamcmd:steam,
+    csgoDir:csgo,
+    port_number:port
   }
 
 }
