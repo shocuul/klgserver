@@ -112,8 +112,9 @@ module.exports = {
 
         break;
       case 'csgo':
-        var values = ValuesManager.getAllValues();
-        sails.log(values);
+      ValuesManager.getAllValues().then(function(values){
+          sails.log(values)
+        });
         break;
       case 'minecraft':
         var fs = require('fs');

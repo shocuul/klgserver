@@ -1,7 +1,9 @@
 function getAllValues(){
 
-  Options.find().exec(function(err, records){
-    var steam, csgo, port;
+  var opt = Options.find().then(function(err, records){
+    var steam;
+    var csgo;
+    var port;
     for (var i = 0; i < records.length; i++) {
       switch (records[i].option_name) {
         case "steamcmd":
@@ -17,13 +19,15 @@ function getAllValues(){
 
       }
     }
+    return {
+      steamcmd:steam,
+      csgoDir:csgo,
+      port_number:port
+    }
   })
+  return opt;
 
-  return {
-    steamcmd:steam,
-    csgoDir:csgo,
-    port_number:port
-  }
+
 
 }
 
