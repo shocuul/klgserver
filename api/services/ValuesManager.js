@@ -18,10 +18,6 @@ function getAllValues(){
     }
   })
   return dict;
-
-
-
-
 }
 
 function saveValue(key,value){

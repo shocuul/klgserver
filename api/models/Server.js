@@ -112,9 +112,10 @@ module.exports = {
 
         break;
       case 'csgo':
+        Options.findOne({option_name:'csgoDir'}).then(function(baseCsgoDir){
+          var copy = exec('cp '+baseCsgoDir+' '+record.base_dir+'; echo "Servidor CSGO Copiado";',{async:true});
+        })
 
-        var values = ValuesManager.getAllValues();
-        sails.log(values);
         break;
       case 'minecraft':
         var fs = require('fs');
