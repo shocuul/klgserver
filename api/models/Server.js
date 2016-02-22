@@ -115,7 +115,7 @@ module.exports = {
       //Si el juego es csgo
         Options.findOne({option_name:'csgoDir'}).then(function(baseCsgoDir){
           sails.log(baseCsgoDir);
-          var copy = exec('cp '+baseCsgoDir.option_value+'* '+record.base_dir+'; echo "Servidor CSGO Copiado";',{async:true});
+          var copy = exec('cp -r '+baseCsgoDir.option_value+'* '+record.base_dir+'; echo "Servidor CSGO Copiado";',{async:true});
         })
 
         break;
