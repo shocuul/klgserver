@@ -2,11 +2,11 @@
   <h3 class="modal-title">Crear Nuevo Servidor</h3>
 </div>
 <div class="modal-body">
-  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
   <p>Selecciona el servidor:</p>
   <label class="youplay-select">
-    <select ng-model="server.game" name="game">
-      <option ng-repeat="server in avaliableServers" value="{{server.server}}">{{server.display}}</option>
+    <select ng-model="vm.server.game" name="game">
+      <option ng-repeat="server in vm.avaliableServers" value="{{server.server}}">{{server.display}}</option>
     </select>
   </label>
   <div ng-if="server.game == 'minecraft'">
@@ -14,7 +14,7 @@
     Selecciona el tipo se servidor
   </p>
   <label class="youplay-select" ng-if="server.game == 'minecraft'">
-    <select ng-model="server.game_type" name="game_type">
+    <select ng-model="vm.server.game_type" name="game_type">
       <option ng-repeat="type in gameTypeMinecraft" value="{{type.gameType}}">{{type.display}}</option>
     </select>
   </label>
@@ -22,11 +22,11 @@
   <p>
     Numero de Jugadores <!-- Investigar el numero de jugadores --->
     <div class="youplay-input">
-      <input type="text" ng-model="server.num_player" name="num_player" placeholder="Introdusca el numero de jugadores">
+      <input type="text" ng-model="vm.server.num_player" name="num_player" placeholder="Introdusca el numero de jugadores">
     </div>
   </p>
 </div>
 <div class="modal-footer">
-  <button class="btn" type="button" ng-click="ok($event); $event.stopPropagation();"> Crear </button>
-  <button class="btn" type="button" ng-click="cancel()"> Cancelar </button>
+  <button class="btn" type="button" ng-click="vm.ok($event); $event.stopPropagation();"> Crear </button>
+  <button class="btn" type="button" ng-click="vm.cancel()"> Cancelar </button>
 </div>

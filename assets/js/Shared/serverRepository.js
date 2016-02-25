@@ -1,11 +1,11 @@
 (function(angular){
 	"use strict";
-	
+
 	/**
      * @name ServerService
      * @ngInject
      */
-	function ServerService(CurrentUser,$sails,$filter){
+	function ServerService(CurrentUser,$sails,$filter,$http){
 		this.getAll = getAll;
 		this.create = create;
 		this.remove = remove;
@@ -13,7 +13,7 @@
 
 		var currentUser = CurrentUser.user;
 		var UserServers = UserServers || [];
-	
+
 		function getAll(){
 			return $sails.get('/user/'+currentUser().id+'/servers').then(function(response){
 						// return $sails.get('/server/').then(function(response){
@@ -35,27 +35,27 @@
 								UserServers.splice(index,1,server);
 							}
 						});
-	
-	
+
+
 						return UserServers;
 					},function(response){
 						console.log("Error en getAll Server Service");
 			});
 		}
-		
+
 		function create(newServer){
 			return $http.post('/user/'+currentUser().id+'/servers',newServer);
 		}
-		
+
 		function remove(server){
 			return $http.delete('/user/'+currentUser().id+'/servers/'+server.id);
 		}
-		
+
 		function checkIfExist(idServer){
 			return $filter('getIndex')(UserServers, parseInt(idServer,10));
 		}
 	}
-	
+
 	function getIndex(){
 		return function(input, id){
 			var i = 0,
@@ -68,9 +68,9 @@
 			return null;
 		}
 	}
-    
+
     angular.module('KaosLatinServer')
     .service('ServerService',ServerService)
     .filter('getIndex',getIndex);
-	
+
 })(angular);

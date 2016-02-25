@@ -15,19 +15,19 @@
       var modalInstance = $uibModal.open({
         animation:true,
         templateUrl:'Modals/new-server.html',
-        controller:'CreateServerModalCtrl'
+        controller:'CreateServerModalCtrl as vm'
       });
       modalInstance.result.then(function(){
       })
     }
   }
-  
+
   DashboardCtrl.resolve = {
       servers:function(ServerService){
           return ServerService.getAll();
       }
   }
-  
+
   /**
    * @name CreateServerModalCtrl
    * @desc Create new server for the user
@@ -67,11 +67,11 @@
         display:'Vanilla'
       }
     ];
-    
+
     function closeAlert(index){
       vm.alerts.splice(index,1);
     }
-    
+
     function ok(){
       if(vm.server.game == undefined){
         vm.alerts.push({msg:'No a introducido un juego'});
@@ -82,7 +82,7 @@
         $uibModalInstance.close();
       }
     }
-    
+
     function cancel(){
       $uibModalInstance.dismiss('cancel');
     }
@@ -97,7 +97,7 @@
           return !status ? $sce.trustAsHtml('<span class="label label-info">Instalando</span>') : $sce.trustAsHtml('<span class="label label-success">Completo</span>');
       }
   }
-  
+
   function config($stateProvider){
     $stateProvider.state('user.dashboard',{
         url:'/dashboard',
