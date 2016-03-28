@@ -17,7 +17,10 @@ module.exports.bootstrap = function(cb) {
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   //mkdir('-p','out/release');
+  // Se crea el shelljs global para usarlo en cualquier parte del programa
   require('shelljs/global');
+
+  // Preguntamos al sistema si hay instalado ciertos programas necesarios para el correcto funcionamiento de la applicacion
   if(!which('awk')){
     sails.log('No se encuentra el programa awk');
     exit(0);
@@ -25,12 +28,14 @@ module.exports.bootstrap = function(cb) {
     sails.log('No se encuentra el programa screen');
     exit(0);
   }else{
-    ServersManager.create();
-    CoreManager.checkForAdminUser();
-    CoreManager.prepareDirs();
+
+    // Si todo esta en orden procedemos a iniciar el sistema.
+    //ServersManager.create();
+    //CoreManager.checkForAdminUser();
+    //CoreManager.prepareDirs();
     // Se crea la opcion port number para llevar un control de los puestos del servidor.
     Options.findOrCreate({option_name:'port_number'},{option_name:'port_number',option_value:'27000'}).exec(function(err, record){
-      sails.log("Se creo la opcion port number" + record.option_value);
+      sails.log("Se creo la opcion port number " + record.option_value);
     })
     setTimeout(function(){
       sails.log.info('Make sure the sudo password is turning off,');
