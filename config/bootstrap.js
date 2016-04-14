@@ -29,10 +29,14 @@ module.exports.bootstrap = function(cb) {
     exit(0);
   }else{
 
+
     // Si todo esta en orden procedemos a iniciar el sistema.
     //ServersManager.create();
     //CoreManager.checkForAdminUser();
-    //CoreManager.prepareDirs();
+    //Crea los directorios necesarios e instala los servidores.
+    CoreManager.prepareDirs().then(function(){
+      CoreManager.installSteamCmd();
+    });
     // Se crea la opcion port number para llevar un control de los puestos del servidor.
     Options.findOrCreate({option_name:'port_number'},{option_name:'port_number',option_value:'27000'}).exec(function(err, record){
       sails.log("Se creo la opcion port number " + record.option_value);
@@ -42,7 +46,7 @@ module.exports.bootstrap = function(cb) {
       sails.log.info('for currect behavior of the system');
       sails.log.info('---------------------------------------------------------');
     },1000);
-    CoreManager.checkForRequiredValues();
+    //CoreManager.checkForRequiredValues();
     cb();
 
   }

@@ -34,9 +34,9 @@ module.exports.server = {
 	** Counter Strike Global Offensive
 	*/
 	// Servidor de instalacion 
-	csgoBaseDir:'/kls/install/csgo/',
+	csgoBaseDir:'/home/developer/kls/install/csgo/',
 	// Servicio Steam CMD
-    steamCmdDir:'/kls/install/steamcmd/',
+    steamCmdDir:'/home/developer/kls/install/steamcmd/',
 
 	
 	/*
