@@ -6,6 +6,7 @@ var steamDir = sails.config.server.steamCmdDir;
 var csgoDir = sails.config.server.csgoBaseDir;
 var baseDir = sails.config.server.serverBaseDir;
 var cs16Dir = sails.config.server.cs16BaseDir;
+
 var CoreManager = {
 
   prepareDirs : function(){
@@ -36,9 +37,35 @@ var CoreManager = {
     };
   })
   return deferred;
-}
+},
+  installCsGo : function(){
+    var deferred = new Promise(function(resolve, reject){
+      var shell = require('shelljs');
+      sails.log(steamDir);
+      shell.cd(steamDir);
+      shell.exec('./steamcmd.sh +login anonymous +force_install_dir '+ csgoDir +' +app_update 740 +quit',{async:true});
+      resolve();
+    })
+    return deferred;
+  },
+  installCs16 : function(){
+    var deferred = new Promise(function(resolve, reject){
+      var shell = require('shelljs');
+      shell.cd(steamDir);
+      shell.exec('./steamcmd.sh +login anonymous +force_install_dir '+ cs16Dir +' +app_set_config 90 mod cstrike +app_update 90 validate +quit',{async:true});
+      resolve();
+    })
+    return deferred;
+  },
+  installMinecraft : function(){
+    var deferred = new Promise(function(resolve, reject){
+      
+    })
+  }
 
 }
+
+///////////////////////////////////////////////////////////////
 var steamcmdDir;
 var csgoDir;
 

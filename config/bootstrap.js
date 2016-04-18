@@ -35,7 +35,11 @@ module.exports.bootstrap = function(cb) {
     //CoreManager.checkForAdminUser();
     //Crea los directorios necesarios e instala los servidores.
     CoreManager.prepareDirs().then(function(){
-      CoreManager.installSteamCmd();
+      CoreManager.installSteamCmd().then(function(){
+        CoreManager.installCsGo().then(function(){
+          CoreManager.installCs16();
+        });
+      });
     });
     // Se crea la opcion port number para llevar un control de los puestos del servidor.
     Options.findOrCreate({option_name:'port_number'},{option_name:'port_number',option_value:'27000'}).exec(function(err, record){
