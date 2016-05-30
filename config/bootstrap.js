@@ -34,6 +34,7 @@ module.exports.bootstrap = function(cb) {
     //ServersManager.create();
     //CoreManager.checkForAdminUser();
     //Crea los directorios necesarios e instala los servidores.
+    /*
     CoreManager.prepareDirs().then(function(){
       CoreManager.installSteamCmd().then(function(){
         CoreManager.installCsGo().then(function(){
@@ -51,6 +52,7 @@ module.exports.bootstrap = function(cb) {
       sails.log.info('---------------------------------------------------------');
     },1000);
     //CoreManager.checkForRequiredValues();
+    */
     cb();
 
   }

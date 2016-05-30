@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="KaosLatinServer">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,51 +92,51 @@
     <!-- 1. Load libraries -->
      <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/zone.js/dist/zone.min.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
 
     <!-- 2. Configure SystemJS -->
     <script>
     /**
-     * System configuration for Angular 2 samples
-     * Adjust as necessary for your application needs.
-     */
-    (function(global) {
-      // map tells the System loader where to look for things
-      var map = {
-        'app':                        'app', // 'dist',
-        '@angular':                   'node_modules/@angular',
-        'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-        'rxjs':                       'node_modules/rxjs'
-      };
-      // packages tells the System loader how to load when no filename and/or no extension
-      var packages = {
-        'app':                        { main: 'main.js',  defaultExtension: 'js' },
-        'rxjs':                       { defaultExtension: 'js' },
-        'angular2-in-memory-web-api': { defaultExtension: 'js' },
-      };
-      var ngPackageNames = [
-        'common',
-        'compiler',
-        'core',
-        'http',
-        'platform-browser',
-        'platform-browser-dynamic',
-        'router',
-        'router-deprecated',
-        'upgrade',
-      ];
-      // Add package entries for angular packages
-      ngPackageNames.forEach(function(pkgName) {
-        packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
-      });
-      var config = {
-        map: map,
-        packages: packages
-      }
-      System.config(config);
-    })(this);
+ * System configuration for Angular 2 samples
+ * Adjust as necessary for your application needs.
+ */
+(function(global) {
+  // map tells the System loader where to look for things
+  var map = {
+    'app':                        'app', // 'dist',
+    '@angular':                   'node_modules/@angular',
+    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
+    'rxjs':                       'node_modules/rxjs'
+  };
+  // packages tells the System loader how to load when no filename and/or no extension
+  var packages = {
+    'app':                        { main: 'main.js',  defaultExtension: 'js' },
+    'rxjs':                       { defaultExtension: 'js' },
+    'angular2-in-memory-web-api': { defaultExtension: 'js' },
+  };
+  var ngPackageNames = [
+    'common',
+    'compiler',
+    'core',
+    'http',
+    'platform-browser',
+    'platform-browser-dynamic',
+    'router',
+    'router-deprecated',
+    'upgrade',
+  ];
+  // Add package entries for angular packages
+  ngPackageNames.forEach(function(pkgName) {
+    packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
+  });
+  var config = {
+    map: map,
+    packages: packages
+  }
+  System.config(config);
+})(this);
     </script>
     <script>
       System.import('app').catch(function(err){ console.error(err); });
